@@ -240,9 +240,9 @@ export default function AgreementModal({
 
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Agreement Content Viewer */}
-          <ScrollArea className="flex-1 bg-white">
-            <div className="p-6 max-w-3xl mx-auto">
-              <div className="prose prose-sm max-w-none whitespace-pre-wrap text-sm text-valasys-gray-800 leading-relaxed">
+          <ScrollArea className="flex-1 bg-white border-0">
+            <div className="p-6">
+              <div className="whitespace-pre-wrap text-sm text-valasys-gray-800 leading-relaxed font-system">
                 {AGREEMENT_CONTENT}
               </div>
             </div>
