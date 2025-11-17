@@ -167,63 +167,47 @@ export default function AgreementModal({
           {/* Checkboxes Section */}
           <div className="px-6 py-6 border-t bg-white space-y-4">
             <div className="space-y-3">
-              <p className="text-sm font-semibold text-valasys-gray-900">
-                Please confirm the following:
-              </p>
-
-              <div className="flex items-start space-x-3 p-3 rounded-lg bg-valasys-blue/5 border border-valasys-blue/20">
+              <div className="flex items-center space-x-3">
                 <Checkbox
                   id="hasRead"
                   checked={hasRead}
                   onCheckedChange={(checked) => setHasRead(checked === true)}
-                  className="mt-0.5"
                 />
                 <label
                   htmlFor="hasRead"
-                  className="text-sm text-valasys-gray-700 flex flex-col space-y-1 cursor-pointer"
+                  className="text-sm text-valasys-gray-700 cursor-pointer"
                 >
-                  <span className="font-medium">
-                    I have read the entire agreement
-                  </span>
+                  I have read the entire agreement
                 </label>
               </div>
 
-              <div className="flex items-start space-x-3 p-3 rounded-lg bg-valasys-green/5 border border-valasys-green/20">
+              <div className="flex items-center space-x-3">
                 <Checkbox
                   id="hasUnderstood"
                   checked={hasUnderstood}
                   onCheckedChange={(checked) =>
                     setHasUnderstood(checked === true)
                   }
-                  className="mt-0.5"
                 />
                 <label
                   htmlFor="hasUnderstood"
-                  className="text-sm text-valasys-gray-700 flex flex-col space-y-1 cursor-pointer"
+                  className="text-sm text-valasys-gray-700 cursor-pointer"
                 >
-                  <span className="font-medium">
-                    I have understood all the terms and conditions
-                  </span>
+                  I have understood all the terms and conditions
                 </label>
               </div>
 
-              <div className="flex items-start space-x-3 p-3 rounded-lg bg-valasys-orange/5 border border-valasys-orange/20">
+              <div className="flex items-center space-x-3">
                 <Checkbox
                   id="hasAgreed"
                   checked={hasAgreed}
                   onCheckedChange={(checked) => setHasAgreed(checked === true)}
-                  className="mt-0.5"
                 />
                 <label
                   htmlFor="hasAgreed"
-                  className="text-sm text-valasys-gray-700 flex flex-col space-y-1 cursor-pointer"
+                  className="text-sm text-valasys-gray-700 cursor-pointer"
                 >
-                  <span className="font-medium">
-                    I agree to the Master Subscriber Agreement
-                  </span>
-                  <span className="text-xs text-red-600 font-semibold">
-                    All three confirmations required
-                  </span>
+                  I agree to the Master Subscriber Agreement
                 </label>
               </div>
             </div>
