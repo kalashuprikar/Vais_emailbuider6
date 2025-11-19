@@ -667,77 +667,92 @@ export default function Login() {
               </p>
             </div>
 
-            {/* Customer Testimonials */}
+            {/* Customer Testimonials Carousel */}
             <div
-              className={`space-y-4 transform transition-all duration-700 ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+              className={`transform transition-all duration-700 ease-out ${mounted ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
               style={{ transitionDelay: "200ms" }}
             >
-              {/* Testimonial 1 */}
-              <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-white/30 hover:border-valasys-orange/30 hover:bg-white/80 transition-all duration-300">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-valasys-orange text-sm">★</span>
-                    ))}
-                  </div>
-                </div>
-                <p className="text-sm text-valasys-gray-700 mb-3 leading-relaxed">
-                  "VAIS completely transformed how we prioritize leads. ROI increased by 40% in just 3 months."
-                </p>
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-valasys-orange to-valasys-orange-light flex items-center justify-center text-white text-xs font-bold">
-                    JM
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-valasys-gray-900">James Martin</p>
-                    <p className="text-xs text-valasys-gray-600">VP Sales, TechCorp</p>
-                  </div>
-                </div>
-              </div>
+              {/* Carousel Container */}
+              <div className="relative">
+                {/* Testimonial Cards Grid (2 visible) */}
+                <div className="grid grid-cols-2 gap-4">
+                  {[currentTestimonialIndex, (currentTestimonialIndex + 1) % testimonials.length].map((index) => {
+                    const testimonial = testimonials[index];
+                    return (
+                      <div
+                        key={testimonial.id}
+                        className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-white/40 hover:border-valasys-orange/30 hover:bg-white/90 transition-all duration-300 shadow-sm"
+                      >
+                        {/* Top Row: Avatar, Name, Rating */}
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex items-start gap-3 flex-1">
+                            <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${testimonial.color} flex items-center justify-center text-white text-sm font-bold flex-shrink-0`}>
+                              {testimonial.initials}
+                            </div>
+                            <div className="flex-1">
+                              <h4 className="font-semibold text-sm text-valasys-gray-900">
+                                {testimonial.name}
+                              </h4>
+                              <p className="text-xs text-valasys-gray-600">
+                                {testimonial.title}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
 
-              {/* Testimonial 2 */}
-              <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-white/30 hover:border-valasys-orange/30 hover:bg-white/80 transition-all duration-300">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-valasys-orange text-sm">★</span>
-                    ))}
-                  </div>
-                </div>
-                <p className="text-sm text-valasys-gray-700 mb-3 leading-relaxed">
-                  "The AI insights are incredible. We're closing deals 2x faster with better quality leads."
-                </p>
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-valasys-blue to-valasys-blue-light flex items-center justify-center text-white text-xs font-bold">
-                    SR
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-valasys-gray-900">Sarah Rodriguez</p>
-                    <p className="text-xs text-valasys-gray-600">Director, Sales Growth</p>
-                  </div>
-                </div>
-              </div>
+                        {/* Rating */}
+                        <div className="flex gap-1 mb-3">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <span key={i} className="text-valasys-orange text-lg">★</span>
+                          ))}
+                        </div>
 
-              {/* Testimonial 3 */}
-              <div className="bg-white/60 backdrop-blur-sm rounded-xl p-5 border border-white/30 hover:border-valasys-orange/30 hover:bg-white/80 transition-all duration-300">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-valasys-orange text-sm">★</span>
-                    ))}
-                  </div>
+                        {/* Review Quote */}
+                        <h5 className="font-semibold text-sm text-valasys-gray-900 mb-2">
+                          "{testimonial.quote}"
+                        </h5>
+
+                        {/* Review Text */}
+                        <p className="text-xs text-valasys-gray-600 leading-relaxed">
+                          {testimonial.review}
+                        </p>
+                      </div>
+                    );
+                  })}
                 </div>
-                <p className="text-sm text-valasys-gray-700 mb-3 leading-relaxed">
-                  "Best investment we've made. Immediate impact on pipeline quality and team efficiency."
-                </p>
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-valasys-green to-valasys-green-light flex items-center justify-center text-white text-xs font-bold">
-                    MK
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-valasys-gray-900">Michael Kim</p>
-                    <p className="text-xs text-valasys-gray-600">CEO, Growth Ventures</p>
-                  </div>
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={prevTestimonial}
+                  className="absolute -left-5 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/70 backdrop-blur-sm border border-white/30 hover:bg-white/90 hover:border-valasys-orange/30 transition-all duration-300 group"
+                >
+                  <svg className="w-4 h-4 text-valasys-gray-600 group-hover:text-valasys-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+
+                <button
+                  onClick={nextTestimonial}
+                  className="absolute -right-5 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/70 backdrop-blur-sm border border-white/30 hover:bg-white/90 hover:border-valasys-orange/30 transition-all duration-300 group"
+                >
+                  <svg className="w-4 h-4 text-valasys-gray-600 group-hover:text-valasys-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                {/* Dots Indicator */}
+                <div className="flex justify-center gap-2 mt-6">
+                  {[...Array(testimonials.length - 1)].map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentTestimonialIndex(i)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        i === currentTestimonialIndex
+                          ? "w-8 bg-valasys-orange"
+                          : "w-2 bg-white/40 hover:bg-white/60"
+                      }`}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
