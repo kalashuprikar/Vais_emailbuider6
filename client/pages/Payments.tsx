@@ -772,6 +772,7 @@ export default function Payments() {
   const [sortDir, setSortDir] = useState<SortDir>("desc");
   const [paymentMethodsList, setPaymentMethodsList] =
     useState<PaymentMethod[]>(paymentMethods);
+  const [addPaymentDialogOpen, setAddPaymentDialogOpen] = useState(false);
 
   const uniqueTypes = useMemo(
     () => Array.from(new Set(rows.map((r) => r.type))).sort(),
