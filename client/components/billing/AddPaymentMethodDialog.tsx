@@ -621,29 +621,29 @@ export function AddPaymentMethodDialog({
                 )}
               </div>
 
-              <div className="flex gap-3 pt-4">
+              <div className="flex gap-3 pt-6 border-t border-gray-200">
                 <Button
                   variant="outline"
                   onClick={handleClose}
                   disabled={isSubmitting}
-                  className="flex-1"
+                  className="flex-1 h-12 border-2 border-gray-300 hover:border-gray-400 font-semibold text-gray-700 transition-all"
                 >
                   Cancel
                 </Button>
                 <Button
                   onClick={handleAddPayPal}
                   disabled={isSubmitting}
-                  className="flex-1 bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 text-white font-semibold h-11"
+                  className="flex-1 h-12 bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 disabled:opacity-50 text-white font-bold shadow-lg hover:shadow-xl transition-all"
                 >
                   {isSubmitting ? (
-                    <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      Adding...
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Adding...</span>
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2">
-                      <Check className="w-4 h-4" />
-                      Add PayPal
+                    <div className="flex items-center justify-center gap-2">
+                      <Check className="w-5 h-5" />
+                      <span>Add PayPal</span>
                     </div>
                   )}
                 </Button>
