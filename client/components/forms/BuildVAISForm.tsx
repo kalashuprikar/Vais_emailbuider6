@@ -1127,16 +1127,16 @@ export default function BuildVAISForm() {
                                   </Button>
                                 </DialogTrigger>
                                 <DialogContent className="max-w-lg bg-white">
-                                  <DialogHeader className="space-y-3 pb-4 border-b border-valasys-gray-200">
-                                    <div className="flex items-start justify-between gap-3">
-                                      <div>
-                                        <DialogTitle className="text-xl font-bold text-valasys-gray-900">
-                                          Topic Insights
-                                        </DialogTitle>
-                                        <p className="text-xs text-valasys-gray-500 font-normal mt-1">
-                                          Detailed intelligence about this intent topic
-                                        </p>
-                                      </div>
+                                  <div className="flex items-start justify-between gap-3 pb-4 border-b border-valasys-gray-200">
+                                    <div>
+                                      <DialogTitle className="text-xl font-bold text-valasys-gray-900">
+                                        Topic Insights
+                                      </DialogTitle>
+                                      <p className="text-xs text-valasys-gray-500 font-normal mt-1">
+                                        Detailed intelligence about this intent topic
+                                      </p>
+                                    </div>
+                                    <div className="flex items-center gap-2 flex-shrink-0">
                                       <span className="inline-flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-valasys-orange to-valasys-orange-light text-white text-xs font-semibold whitespace-nowrap">
                                         <Sparkles
                                           className="w-3.5 h-3.5 animate-pulse"
@@ -1145,7 +1145,7 @@ export default function BuildVAISForm() {
                                         AI Generated
                                       </span>
                                     </div>
-                                  </DialogHeader>
+                                  </div>
 
                                   <div className="py-6">
                                     {getTopicInsight(topic)}
