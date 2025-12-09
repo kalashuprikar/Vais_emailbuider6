@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Wrench, Mail } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Maintenance() {
+  const [email, setEmail] = useState("");
+  const { toast } = useToast();
+
+  const handleNotifyMe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address to be notified.",
+        variant: "destructive",
+      });
+      return;
+    }
+    toast({
+      title: "Success!",
+      description: "We'll notify you when the site is back online.",
+    });
+    setEmail("");
+  };
   return (
     <div className="min-h-screen w-full bg-[radial-gradient(ellipse_at_top_left,rgba(255,106,0,0.15),transparent_50%),radial-gradient(ellipse_at_bottom_right,rgba(26,115,232,0.12),transparent_50%),radial-gradient(ellipse_at_top_right,rgba(0,196,140,0.12),transparent_40%)] overflow-hidden flex items-center justify-center relative bg-white">
       {/* Animated Background Elements */}
