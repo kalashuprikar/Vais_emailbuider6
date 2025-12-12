@@ -100,7 +100,11 @@ export function FeedbackModal({ open, onOpenChange }: FeedbackModalProps) {
           {/* Send Button */}
           <Button
             onClick={handleSendFeedback}
-            className="w-full bg-valasys-orange hover:bg-valasys-orange/90 text-white font-semibold py-2 rounded-lg transition-colors"
+            style={{
+              backgroundColor: "#f7c52a",
+              color: "#000",
+            }}
+            className="w-full hover:opacity-90 text-black font-semibold py-2 rounded-lg transition-colors"
           >
             Send Feedback
           </Button>
