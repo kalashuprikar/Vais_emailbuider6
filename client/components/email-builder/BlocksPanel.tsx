@@ -212,7 +212,7 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
 
         <TabsContent
           value="blocks"
-          className="flex-1 flex flex-col overflow-hidden m-0"
+          className="flex-1 flex flex-col overflow-hidden m-0 h-full"
         >
           <div className="p-4 border-b border-gray-200">
             <Input
@@ -223,8 +223,8 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
             />
           </div>
 
-          <div className="flex-1 p-4 overflow-hidden">
-            <div className="grid grid-cols-3 gap-3">
+          <div className="flex-1 p-4 overflow-hidden h-full">
+            <div className="grid grid-cols-3 gap-3 h-full">
               {filteredBlocks.map((block) => (
                 <DraggableBlockButton key={block.id} block={block} />
               ))}
