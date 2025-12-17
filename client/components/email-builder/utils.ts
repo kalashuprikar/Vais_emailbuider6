@@ -321,7 +321,9 @@ export function createCenteredImageCardBlock(): CenteredImageCardBlock {
   };
 }
 
-export function createSplitImageCardBlock(): SplitImageCardBlock {
+export function createSplitImageCardBlock(
+  imagePosition: "left" | "right" = "left",
+): SplitImageCardBlock {
   return {
     type: "splitImageCard",
     id: generateId(),
@@ -335,13 +337,128 @@ export function createSplitImageCardBlock(): SplitImageCardBlock {
     buttonText: "Call to action",
     buttonLink: "#",
     buttonLinkType: "url",
-    imagePosition: "left",
+    imagePosition,
     backgroundColor: "#ffffff",
     borderColor: "#e0e0e0",
     borderWidth: 1,
     borderRadius: 8,
     padding: 20,
     margin: 16,
+    visibility: "all",
+  };
+}
+
+export function createTwoColumnCardBlock(): HtmlBlock {
+  return {
+    type: "html",
+    id: generateId(),
+    content: `<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
+      <tr>
+        <td width="48%" style="vertical-align: top; padding-right: 10px;">
+          <div style="background-color: #333333; color: #ffffff; padding: 24px; border-radius: 8px;">
+            <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: bold;">Some title here</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+          </div>
+        </td>
+        <td width="48%" style="vertical-align: top; padding-left: 10px;">
+          <div style="background-color: #333333; color: #ffffff; padding: 24px; border-radius: 8px;">
+            <h3 style="margin: 0 0 12px 0; font-size: 18px; font-weight: bold;">Some title here</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+          </div>
+        </td>
+      </tr>
+    </table>`,
+    width: 100,
+    widthUnit: "%",
+    padding: 0,
+    margin: 0,
+    borderWidth: 0,
+    borderColor: "#000000",
+    borderRadius: 0,
+    visibility: "all",
+  };
+}
+
+export function createPromoBlock(): HtmlBlock {
+  return {
+    type: "html",
+    id: generateId(),
+    content: `<div style="background-color: #f9f9f9; padding: 40px 20px; text-align: center; border-radius: 8px; margin: 20px 0;">
+      <p style="margin: 0 0 12px 0; font-size: 16px; color: #666;">Save 15% on your next order!</p>
+      <h2 style="margin: 0; font-size: 36px; font-weight: bold; color: #000; letter-spacing: 2px;">PROMO15</h2>
+    </div>`,
+    width: 100,
+    widthUnit: "%",
+    padding: 0,
+    margin: 0,
+    borderWidth: 0,
+    borderColor: "#000000",
+    borderRadius: 0,
+    visibility: "all",
+  };
+}
+
+export function createStatsBlock(): HtmlBlock {
+  return {
+    type: "html",
+    id: generateId(),
+    content: `<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
+      <tr>
+        <td width="33%" style="text-align: center; padding: 20px;">
+          <h3 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; color: #000;">4.8</h3>
+          <p style="margin: 0; font-size: 14px; color: #666;">Average rating</p>
+        </td>
+        <td width="33%" style="text-align: center; padding: 20px; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0;">
+          <h3 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; color: #000;">120</h3>
+          <p style="margin: 0; font-size: 14px; color: #666;">Reviews</p>
+        </td>
+        <td width="33%" style="text-align: center; padding: 20px;">
+          <h3 style="margin: 0 0 8px 0; font-size: 28px; font-weight: bold; color: #000;">200K</h3>
+          <p style="margin: 0; font-size: 14px; color: #666;">Downloads</p>
+        </td>
+      </tr>
+    </table>`,
+    width: 100,
+    widthUnit: "%",
+    padding: 0,
+    margin: 0,
+    borderWidth: 0,
+    borderColor: "#000000",
+    borderRadius: 0,
+    visibility: "all",
+  };
+}
+
+export function createFeaturesBlock(): HtmlBlock {
+  return {
+    type: "html",
+    id: generateId(),
+    content: `<table width="100%" border="0" cellpadding="0" cellspacing="0" style="margin: 20px 0;">
+      <tr>
+        <td width="33%" style="text-align: center; padding: 20px;">
+          <div style="font-size: 32px; margin-bottom: 12px;">❤️</div>
+          <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: bold; color: #000;">Some title here</h3>
+          <p style="margin: 0; font-size: 13px; color: #666; line-height: 1.5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </td>
+        <td width="33%" style="text-align: center; padding: 20px;">
+          <div style="font-size: 32px; margin-bottom: 12px;">🎁</div>
+          <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: bold; color: #000;">Some title here</h3>
+          <p style="margin: 0; font-size: 13px; color: #666; line-height: 1.5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </td>
+        <td width="33%" style="text-align: center; padding: 20px;">
+          <div style="font-size: 32px; margin-bottom: 12px;">ℹ️</div>
+          <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: bold; color: #000;">Some title here</h3>
+          <p style="margin: 0; font-size: 13px; color: #666; line-height: 1.5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </td>
+      </tr>
+    </table>`,
+    width: 100,
+    widthUnit: "%",
+    padding: 0,
+    margin: 0,
+    borderWidth: 0,
+    borderColor: "#000000",
+    borderRadius: 0,
     visibility: "all",
   };
 }

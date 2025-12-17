@@ -36,6 +36,10 @@ import {
   createSpacerBlock,
   createCenteredImageCardBlock,
   createSplitImageCardBlock,
+  createTwoColumnCardBlock,
+  createPromoBlock,
+  createStatsBlock,
+  createFeaturesBlock,
 } from "./utils";
 import { ContentBlock } from "./types";
 
@@ -165,22 +169,71 @@ const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
 
   const textImageTemplates: Template[] = [
     {
-      id: "centered-image-card",
-      title: "Image Card with Title & CTA",
+      id: "top-image-section",
+      title: "Top Image Section",
       description:
-        "Centered layout with image banner, title, description and call-to-action button",
+        "Image at top, followed by title, description text, and call-to-action button",
       preview:
-        "https://images.unsplash.com/photo-1470114716159-e389f8712fda?w=400&h=200&fit=crop",
-      blocks: () => [createCenteredImageCardBlock()],
+        "data:image/svg+xml,%3Csvg width='400' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='200' fill='%23f5f5f5'/%3E%3Crect y='0' width='400' height='80' fill='%23ddd'/%3E%3Ctext x='200' y='120' font-size='16' font-weight='bold' text-anchor='middle' fill='%23333'%3ESome title here%3C/text%3E%3Ctext x='200' y='140' font-size='12' text-anchor='middle' fill='%23666'%3ELorem ipsum dolor sit amet%3C/text%3E%3Crect x='150' y='155' width='100' height='30' fill='%23FF6A00' rx='4'/%3E%3Ctext x='200' y='175' font-size='12' text-anchor='middle' fill='white' font-weight='bold'%3ECall to action%3C/text%3E%3C/svg%3E",
+      blocks: () => [
+        createImageBlock(),
+        createTitleBlock(),
+        createTextBlock(),
+        createButtonBlock(),
+      ],
     },
     {
-      id: "split-image-card",
-      title: "Image + Content Split Card",
+      id: "left-image-section",
+      title: "Left Image Section",
       description:
-        "Left image with right content - title, description, optional label and CTA",
+        "Image on left side with title, description text, and CTA button on right side",
       preview:
-        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=200&fit=crop",
-      blocks: () => [createSplitImageCardBlock()],
+        "data:image/svg+xml,%3Csvg width='400' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='200' fill='%23f5f5f5'/%3E%3Crect x='0' y='0' width='180' height='200' fill='%23ddd'/%3E%3Ctext x='250' y='50' font-size='14' font-weight='bold' fill='%23333'%3ETitle%3C/text%3E%3Ctext x='250' y='70' font-size='11' fill='%23666'%3ELorem ipsum dolor sit amet%3C/text%3E%3Ctext x='250' y='85' font-size='11' fill='%23666'%3Econsectetur adipiscing elit%3C/text%3E%3Crect x='220' y='110' width='80' height='25' fill='%23FF6A00' rx='3'/%3E%3Ctext x='260' y='128' font-size='11' text-anchor='middle' fill='white' font-weight='bold'%3ECall to action%3C/text%3E%3C/svg%3E",
+      blocks: () => [createSplitImageCardBlock("left")],
+    },
+    {
+      id: "right-image-section",
+      title: "Right Image Section",
+      description:
+        "Image on right side with title, description text, and CTA button on left side",
+      preview:
+        "data:image/svg+xml,%3Csvg width='400' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='200' fill='%23f5f5f5'/%3E%3Crect x='220' y='0' width='180' height='200' fill='%23ddd'/%3E%3Ctext x='100' y='50' font-size='14' font-weight='bold' fill='%23333'%3ETitle%3C/text%3E%3Ctext x='100' y='70' font-size='11' fill='%23666'%3ELorem ipsum dolor sit amet%3C/text%3E%3Ctext x='100' y='85' font-size='11' fill='%23666'%3Econsectetur adipiscing elit%3C/text%3E%3Crect x='60' y='110' width='80' height='25' fill='%23FF6A00' rx='3'/%3E%3Ctext x='100' y='128' font-size='11' text-anchor='middle' fill='white' font-weight='bold'%3ECall to action%3C/text%3E%3C/svg%3E",
+      blocks: () => [createSplitImageCardBlock("right")],
+    },
+  ];
+
+  const contentTemplates: Template[] = [
+    {
+      id: "two-column-cards",
+      title: "Two Column Cards",
+      description: "Two side-by-side dark cards with titles and descriptions",
+      preview:
+        "data:image/svg+xml,%3Csvg width='400' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='200' fill='%23f5f5f5'/%3E%3Crect x='10' y='20' width='180' height='160' fill='%23333' rx='4'/%3E%3Ctext x='100' y='60' font-size='14' font-weight='bold' text-anchor='middle' fill='white'%3ETitle%3C/text%3E%3Ctext x='100' y='85' font-size='11' text-anchor='middle' fill='white'%3ELorem ipsum dolor%3C/text%3E%3Crect x='210' y='20' width='180' height='160' fill='%23333' rx='4'/%3E%3Ctext x='300' y='60' font-size='14' font-weight='bold' text-anchor='middle' fill='white'%3ETitle%3C/text%3E%3Ctext x='300' y='85' font-size='11' text-anchor='middle' fill='white'%3ELorem ipsum dolor%3C/text%3E%3C/svg%3E",
+      blocks: () => [createTwoColumnCardBlock()],
+    },
+    {
+      id: "promo-section",
+      title: "Promo Code Section",
+      description: "Highlight a promotional code or offer",
+      preview:
+        "data:image/svg+xml,%3Csvg width='400' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='200' fill='%23f9f9f9'/%3E%3Ctext x='200' y='60' font-size='14' text-anchor='middle' fill='%23666'%3ESave 15% on your next order!%3C/text%3E%3Crect x='80' y='90' width='240' height='70' fill='%23fff' stroke='%23ddd' stroke-width='2' rx='4'/%3E%3Ctext x='200' y='145' font-size='36' font-weight='bold' text-anchor='middle' fill='%23000' letter-spacing='3'%3EPROMO15%3C/text%3E%3C/svg%3E",
+      blocks: () => [createPromoBlock()],
+    },
+    {
+      id: "stats-section",
+      title: "Statistics Section",
+      description: "Display key metrics or numbers in three columns",
+      preview:
+        "data:image/svg+xml,%3Csvg width='400' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='200' fill='%23f5f5f5'/%3E%3Ctext x='67' y='80' font-size='24' font-weight='bold' text-anchor='middle' fill='%23000'%3E4.8%3C/text%3E%3Ctext x='67' y='130' font-size='12' text-anchor='middle' fill='%23666'%3ERating%3C/text%3E%3Cline x1='134' y1='30' x2='134' y2='170' stroke='%23ddd' stroke-width='1'/%3E%3Ctext x='200' y='80' font-size='24' font-weight='bold' text-anchor='middle' fill='%23000'%3E120%3C/text%3E%3Ctext x='200' y='130' font-size='12' text-anchor='middle' fill='%23666'%3EReviews%3C/text%3E%3Cline x1='266' y1='30' x2='266' y2='170' stroke='%23ddd' stroke-width='1'/%3E%3Ctext x='333' y='80' font-size='24' font-weight='bold' text-anchor='middle' fill='%23000'%3E200K%3C/text%3E%3Ctext x='333' y='130' font-size='12' text-anchor='middle' fill='%23666'%3EDownloads%3C/text%3E%3C/svg%3E",
+      blocks: () => [createStatsBlock()],
+    },
+    {
+      id: "features-section",
+      title: "Features Section",
+      description: "Showcase features or benefits with icons and titles",
+      preview:
+        "data:image/svg+xml,%3Csvg width='400' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='200' fill='%23f5f5f5'/%3E%3Ctext x='67' y='45' font-size='28' text-anchor='middle'%3E%E2%9D%A4%EF%B8%8F%3C/text%3E%3Ctext x='67' y='75' font-size='12' font-weight='bold' text-anchor='middle' fill='%23000'%3EFeature%3C/text%3E%3Ctext x='67' y='155' font-size='10' text-anchor='middle' fill='%23666'%3ELorem ipsum%3C/text%3E%3Ctext x='200' y='45' font-size='28' text-anchor='middle'%3E%F0%9F%8E%81%3C/text%3E%3Ctext x='200' y='75' font-size='12' font-weight='bold' text-anchor='middle' fill='%23000'%3EFeature%3C/text%3E%3Ctext x='200' y='155' font-size='10' text-anchor='middle' fill='%23666'%3ELorem ipsum%3C/text%3E%3Ctext x='333' y='45' font-size='28' text-anchor='middle'%3Eℹ%EF%B8%8F%3C/text%3E%3Ctext x='333' y='75' font-size='12' font-weight='bold' text-anchor='middle' fill='%23000'%3EFeature%3C/text%3E%3Ctext x='333' y='155' font-size='10' text-anchor='middle' fill='%23666'%3ELorem ipsum%3C/text%3E%3C/svg%3E",
+      blocks: () => [createFeaturesBlock()],
     },
   ];
 
@@ -188,6 +241,10 @@ const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
     {
       title: "Text & images",
       templates: textImageTemplates,
+    },
+    {
+      title: "Content sections",
+      templates: contentTemplates,
     },
     {
       title: "Text",
