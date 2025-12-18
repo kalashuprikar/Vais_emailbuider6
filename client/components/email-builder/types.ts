@@ -133,6 +133,11 @@ export interface SocialBlock {
   }[];
   alignment: "left" | "center" | "right";
   size: "small" | "medium" | "large";
+  shape: "rounded" | "circle" | "square";
+  theme: "colored" | "outlined" | "solid";
+  spacing: number;
+  width: number;
+  widthUnit: "px" | "%";
   padding: number;
   margin: number;
   borderWidth: number;
