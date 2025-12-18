@@ -2637,29 +2637,33 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
             )}
 
             {selectedFooterElement === "address" && (
-              <div>
-                <h4 className="text-sm font-bold text-gray-900 mb-4 pb-3 border-b">
-                  Address Settings
-                </h4>
-                <div className="space-y-3">
-                  <div>
-                    <Label className="text-xs text-gray-700">Content</Label>
-                    <textarea
-                      value={block.address.content}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...block,
-                          address: { ...block.address, content: e.target.value },
-                        })
-                      }
-                      className="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:ring-valasys-orange focus:ring-2"
-                      rows={2}
-                    />
-                  </div>
-                  <div>
-                    <Label className="text-xs text-gray-700">
-                      Font Size (px)
-                    </Label>
+              <>
+                <div>
+                  <Label className="text-xs font-semibold text-gray-700 mb-2 block">
+                    Content
+                  </Label>
+                  <textarea
+                    value={block.address.content}
+                    onChange={(e) =>
+                      onBlockUpdate({
+                        ...block,
+                        address: { ...block.address, content: e.target.value },
+                      })
+                    }
+                    className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange focus:border-transparent"
+                    rows={3}
+                  />
+                </div>
+
+                <div className="border-t border-gray-200 pt-4">
+                  <h4 className="text-xs font-bold text-gray-900 mb-3">
+                    Typography
+                  </h4>
+                  <div className="space-y-3">
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-1 block">
+                        Font Size (px)
+                      </Label>
                     <Input
                       type="number"
                       value={block.address.fontSize}
@@ -2675,80 +2679,81 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       className="focus:ring-valasys-orange focus:ring-2"
                     />
                   </div>
-                  <div>
-                    <Label className="text-xs text-gray-700">Font Weight</Label>
-                    <select
-                      value={block.address.fontWeight}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...block,
-                          address: {
-                            ...block.address,
-                            fontWeight: e.target.value as any,
-                          },
-                        })
-                      }
-                      className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                    >
-                      <option value="normal">Normal</option>
-                      <option value="bold">Bold</option>
-                    </select>
-                  </div>
-                  <div>
-                    <Label className="text-xs text-gray-700">Font Style</Label>
-                    <select
-                      value={block.address.fontStyle}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...block,
-                          address: {
-                            ...block.address,
-                            fontStyle: e.target.value as any,
-                          },
-                        })
-                      }
-                      className="w-full border border-gray-300 rounded px-2 py-1 text-sm"
-                    >
-                      <option value="normal">Normal</option>
-                      <option value="italic">Italic</option>
-                    </select>
-                  </div>
-                  <div>
-                    <Label className="text-xs text-gray-700">Font Family</Label>
-                    <Input
-                      type="text"
-                      value={block.address.fontFamily}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...block,
-                          address: {
-                            ...block.address,
-                            fontFamily: e.target.value,
-                          },
-                        })
-                      }
-                      placeholder="Arial, sans-serif"
-                      className="focus:ring-valasys-orange focus:ring-2"
-                    />
-                  </div>
-                  <div>
-                    <Label className="text-xs text-gray-700">Font Color</Label>
-                    <Input
-                      type="color"
-                      value={block.address.fontColor}
-                      onChange={(e) =>
-                        onBlockUpdate({
-                          ...block,
-                          address: {
-                            ...block.address,
-                            fontColor: e.target.value,
-                          },
-                        })
-                      }
-                    />
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-1 block">Font Weight</Label>
+                      <select
+                        value={block.address.fontWeight}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            address: {
+                              ...block.address,
+                              fontWeight: e.target.value as any,
+                            },
+                          })
+                        }
+                        className="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange"
+                      >
+                        <option value="normal">Normal</option>
+                        <option value="bold">Bold</option>
+                      </select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-1 block">Font Style</Label>
+                      <select
+                        value={block.address.fontStyle}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            address: {
+                              ...block.address,
+                              fontStyle: e.target.value as any,
+                            },
+                          })
+                        }
+                        className="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange"
+                      >
+                        <option value="normal">Normal</option>
+                        <option value="italic">Italic</option>
+                      </select>
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-1 block">Font Family</Label>
+                      <Input
+                        type="text"
+                        value={block.address.fontFamily}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            address: {
+                              ...block.address,
+                              fontFamily: e.target.value,
+                            },
+                          })
+                        }
+                        placeholder="Arial, sans-serif"
+                        className="focus:ring-valasys-orange focus:ring-2"
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-xs text-gray-700 mb-1 block">Font Color</Label>
+                      <Input
+                        type="color"
+                        value={block.address.fontColor}
+                        onChange={(e) =>
+                          onBlockUpdate({
+                            ...block,
+                            address: {
+                              ...block.address,
+                              fontColor: e.target.value,
+                            },
+                          })
+                        }
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              </>
             )}
 
             {selectedFooterElement === "subscriptionText" && (
