@@ -692,7 +692,11 @@ export function renderBlockToHTML(block: ContentBlock): string {
     case "social": {
       const socialBlock = block as SocialBlock;
       const iconSize =
-        socialBlock.size === "small" ? 20 : socialBlock.size === "medium" ? 32 : 48;
+        socialBlock.size === "small"
+          ? 20
+          : socialBlock.size === "medium"
+            ? 32
+            : 48;
 
       const getSocialIconColor = (platform: string): string => {
         const colors: { [key: string]: string } = {
@@ -725,7 +729,12 @@ export function renderBlockToHTML(block: ContentBlock): string {
         return icons[platformLower] || "";
       };
 
-      const borderRadius = socialBlock.shape === "circle" ? "50%" : socialBlock.shape === "rounded" ? "6px" : "2px";
+      const borderRadius =
+        socialBlock.shape === "circle"
+          ? "50%"
+          : socialBlock.shape === "rounded"
+            ? "6px"
+            : "2px";
 
       const getBackgroundColor = (platformName: string): string => {
         if (socialBlock.theme === "colored") {
@@ -763,8 +772,16 @@ export function renderBlockToHTML(block: ContentBlock): string {
         })
         .join("");
 
-      const justifyClass = socialBlock.alignment === "left" ? "flex-start" : socialBlock.alignment === "right" ? "flex-end" : "center";
-      const width = socialBlock.widthUnit === "%" ? `${socialBlock.width}%` : `${socialBlock.width}px`;
+      const justifyClass =
+        socialBlock.alignment === "left"
+          ? "flex-start"
+          : socialBlock.alignment === "right"
+            ? "flex-end"
+            : "center";
+      const width =
+        socialBlock.widthUnit === "%"
+          ? `${socialBlock.width}%`
+          : `${socialBlock.width}px`;
 
       return `<div style="display: flex; justify-content: ${justifyClass}; align-items: center; width: ${width}; padding: ${socialBlock.padding}px; margin: ${socialBlock.margin}px auto; gap: 0;">${iconsHtml}</div>`;
     }

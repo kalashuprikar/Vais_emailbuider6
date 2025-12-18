@@ -286,7 +286,8 @@ const SectionsPanel: React.FC<SectionsPanelProps> = ({ onAddBlock }) => {
         {
           id: "footer-social",
           title: "Footer with Social",
-          description: "Footer with social media icons and subscription message",
+          description:
+            "Footer with social media icons and subscription message",
           preview:
             "data:image/svg+xml,%3Csvg width='400' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='400' height='200' fill='%23f5f5f5'/%3E%3Ccircle cx='100' cy='60' r='8' fill='%234267B2'/%3E%3Ccircle cx='120' cy='60' r='8' fill='%23E4405F'/%3E%3Ccircle cx='140' cy='60' r='8' fill='%230A66C2'/%3E%3Ccircle cx='160' cy='60' r='8' fill='%23FF0000'/%3E%3Ctext x='200' y='70' font-size='12' font-weight='bold' text-anchor='middle' fill='%23000'%3EEnterprise name%3C/text%3E%3Ctext x='200' y='90' font-size='11' text-anchor='middle' fill='%23666'%3E69 Street Name, 00000, City%3C/text%3E%3Ctext x='200' y='110' font-size='10' text-anchor='middle' fill='%23999'%3ENewsletter subscription message%3C/text%3E%3Ctext x='200' y='130' font-size='10' text-anchor='middle' fill='%23FF6A00'%3EUnsubscribe%3C/text%3E%3C/svg%3E",
           blocks: () => createFooterWithSocialTemplate(),

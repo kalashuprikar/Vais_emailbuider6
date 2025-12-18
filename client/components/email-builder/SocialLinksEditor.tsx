@@ -130,7 +130,7 @@ export const SocialLinksEditor: React.FC<SocialLinksEditorProps> = ({
   };
 
   const handleAddPlatform = (platformName: string) => {
-    const platform = availablePlatforms.find(p => p.name === platformName);
+    const platform = availablePlatforms.find((p) => p.name === platformName);
     if (platform) {
       const newPlatforms = [
         ...block.platforms,
@@ -162,9 +162,9 @@ export const SocialLinksEditor: React.FC<SocialLinksEditorProps> = ({
     }
   };
 
-  const existingPlatforms = block.platforms.map(p => p.name);
+  const existingPlatforms = block.platforms.map((p) => p.name);
   const availableToAdd = availablePlatforms.filter(
-    p => !existingPlatforms.includes(p.name)
+    (p) => !existingPlatforms.includes(p.name),
   );
 
   return (

@@ -2581,7 +2581,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   </select>
                 </div>
                 <div>
-                  <Label htmlFor="socialShape" className="text-xs text-gray-700">
+                  <Label
+                    htmlFor="socialShape"
+                    className="text-xs text-gray-700"
+                  >
                     Shape
                   </Label>
                   <select
@@ -2601,7 +2604,10 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   </select>
                 </div>
                 <div>
-                  <Label htmlFor="socialTheme" className="text-xs text-gray-700">
+                  <Label
+                    htmlFor="socialTheme"
+                    className="text-xs text-gray-700"
+                  >
                     Theme
                   </Label>
                   <select
