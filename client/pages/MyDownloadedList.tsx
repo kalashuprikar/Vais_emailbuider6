@@ -1528,9 +1528,7 @@ export default function MyDownloadedList() {
                         href={
                           selectedCrm === "hubspot"
                             ? "https://app.hubspot.com/"
-                            : selectedCrm === "salesforce"
-                              ? "https://login.salesforce.com/"
-                              : "https://app.marketo.com/"
+                            : "https://login.salesforce.com/"
                         }
                         target="_blank"
                         rel="noreferrer"
@@ -1538,9 +1536,7 @@ export default function MyDownloadedList() {
                         <span>Open</span>
                         {selectedCrm === "hubspot"
                           ? "HubSpot"
-                          : selectedCrm === "salesforce"
-                            ? "Salesforce"
-                            : "Marketo"}
+                          : "Salesforce"}
                       </a>
                     </Button>
                     <Button asChild variant="outline" size="sm" className="border-gray-300">
@@ -1548,9 +1544,7 @@ export default function MyDownloadedList() {
                         href={
                           selectedCrm === "hubspot"
                             ? "https://knowledge.hubspot.com/crm-setup/import-objects-into-hubspot"
-                            : selectedCrm === "salesforce"
-                              ? "https://help.salesforce.com/s/articleView?id=sf.data_import_wizard.htm&type=5"
-                              : "https://experienceleague.adobe.com/en/docs/marketo/using/product-docs/administration/settings/importing-a-list"
+                            : "https://help.salesforce.com/s/articleView?id=sf.data_import_wizard.htm&type=5"
                         }
                         target="_blank"
                         rel="noreferrer"
