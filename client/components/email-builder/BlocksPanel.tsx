@@ -513,7 +513,7 @@ export const BlocksPanel: React.FC<BlocksPanelProps> = ({ onAddBlock }) => {
           </div>
 
           <div className="p-4">
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               {filteredBlocks.map((block) => (
                 <DraggableBlockButton key={block.id} block={block} />
               ))}
