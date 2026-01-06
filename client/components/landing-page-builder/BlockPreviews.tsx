@@ -80,7 +80,9 @@ export const FeaturesBlockPreview: React.FC<BlockPreviewProps> = ({
   return (
     <div
       onClick={onSelect}
-      className="cursor-pointer hover:bg-gray-50"
+      className={`cursor-pointer transition-all border-2 ${
+        isSelected ? "border-valasys-orange" : "border-gray-200"
+      }`}
       style={{ backgroundColor: props.backgroundColor }}
     >
       <div className="px-8 py-16">
