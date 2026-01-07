@@ -17,6 +17,7 @@ import {
 } from "./utils";
 import { LandingPagePreview } from "./LandingPagePreview";
 import { BlocksPanel } from "./BlocksPanel";
+import { SectionsPanel } from "./SectionsPanel";
 
 interface LandingPageBuilderProps {
   pageId?: string;
