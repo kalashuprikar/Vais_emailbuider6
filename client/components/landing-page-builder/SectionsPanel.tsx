@@ -3,6 +3,15 @@ import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LandingPageBlock } from "./types";
 import {
+  createMeetFramerTemplate,
+  createMeetFramerWithButtonsTemplate,
+  createLogoTemplate,
+  createInfiniteCanvasTemplate,
+  createInfiniteCanvasTwoColumnTemplate,
+  createCanvasPublishTemplate,
+  createThreeColumnTemplate,
+  createStatisticsTemplate,
+  createTestimonialTemplate,
   createPricingTemplate,
   createFaqTemplate,
   createSignupTemplate,
