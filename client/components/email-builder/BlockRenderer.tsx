@@ -214,6 +214,16 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({
           />
         </div>
       );
+    case "twoColumnCard":
+      return (
+        <div onClick={handleClick}>
+          <TwoColumnCardBlockComponent
+            block={block as any}
+            isSelected={isSelected}
+            onUpdate={(updatedBlock) => onBlockUpdate(updatedBlock)}
+          />
+        </div>
+      );
     default:
       return null;
   }
