@@ -28,6 +28,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   const [applyBorderToAllSides, setApplyBorderToAllSides] = useState(true);
   const [linkType, setLinkType] = useState("url");
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
+  const [selectedStatId, setSelectedStatId] = useState<string | null>(null);
   const paddingValue =
     "padding" in (block || {}) ? ((block as any).padding ?? 0) : 0;
   const marginValue =
