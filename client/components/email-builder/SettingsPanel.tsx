@@ -47,6 +47,9 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
     if (block?.type === "twoColumnCard") {
       const twoColBlock = block as any;
       setSelectedCardId(twoColBlock.cards?.[0]?.id || null);
+    } else if (block?.type === "stats") {
+      const statsBlock = block as any;
+      setSelectedStatId(statsBlock.stats?.[0]?.id || null);
     }
   }, [block?.id, block?.type]);
 
