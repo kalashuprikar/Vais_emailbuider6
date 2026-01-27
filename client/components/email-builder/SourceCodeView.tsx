@@ -104,17 +104,25 @@ export const SourceCodeView: React.FC<SourceCodeViewProps> = ({ template }) => {
     }
   };
 
-
   return (
     <div className="flex flex-col h-full bg-gray-50 overflow-hidden">
       {/* Header with Actions - Fixed at top */}
-      <div className="bg-white border-b border-gray-200 p-4 shadow-sm flex-shrink-0 relative z-50 w-full" style={{ overflow: 'visible' }}>
-        <div className="flex items-center justify-between gap-4 mb-2 w-full" style={{ minWidth: '100%' }}>
+      <div
+        className="bg-white border-b border-gray-200 p-4 shadow-sm flex-shrink-0 relative z-50 w-full"
+        style={{ overflow: "visible" }}
+      >
+        <div
+          className="flex items-center justify-between gap-4 mb-2 w-full"
+          style={{ minWidth: "100%" }}
+        >
           <h2 className="text-lg font-semibold text-gray-800 whitespace-nowrap flex-shrink-0">
             HTML Source Code
           </h2>
           <TooltipProvider delayDuration={200}>
-            <div className="flex items-center gap-2 flex-shrink-0" style={{ visibility: 'visible', zIndex: 50 }}>
+            <div
+              className="flex items-center gap-2 flex-shrink-0"
+              style={{ visibility: "visible", zIndex: 50 }}
+            >
               <Tooltip open={openTooltip} onOpenChange={setOpenTooltip}>
                 <TooltipTrigger asChild>
                   <Button
@@ -132,11 +140,7 @@ export const SourceCodeView: React.FC<SourceCodeViewProps> = ({ template }) => {
               </Tooltip>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="flex-shrink-0"
-                  >
+                  <Button variant="outline" size="sm" className="flex-shrink-0">
                     <Download className="w-4 h-4" />
                   </Button>
                 </DropdownMenuTrigger>
