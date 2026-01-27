@@ -64,7 +64,7 @@ export const SourceCodeView: React.FC<SourceCodeViewProps> = ({ template }) => {
     });
   }, [htmlContent]);
 
-  const handleDownload = () => {
+  const handleDownloadHTML = () => {
     const element = document.createElement("a");
     const file = new Blob([htmlContent], { type: "text/html" });
     element.href = URL.createObjectURL(file);
@@ -73,6 +73,58 @@ export const SourceCodeView: React.FC<SourceCodeViewProps> = ({ template }) => {
     element.click();
     document.body.removeChild(element);
 
+    showDownloadedMessage();
+  };
+
+  const handleDownloadJSON = () => {
+    const templateJson = JSON.stringify(template, null, 2);
+    const element = document.createElement("a");
+    const file = new Blob([templateJson], { type: "application/json" });
+    element.href = URL.createObjectURL(file);
+    element.download = `${template.name || "template"}.json`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+
+    showDownloadedMessage();
+  };
+
+  const handleDownloadPDF = () => {
+    // Create a new window to print as PDF
+    const printWindow = window.open("", "", "height=900,width=1200");
+    if (printWindow) {
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>${template.name || "Template"}</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            pre { background-color: #f4f4f4; padding: 15px; overflow-x: auto; }
+            code { font-family: 'Courier New', monospace; font-size: 12px; }
+          </style>
+        </head>
+        <body>
+          <h1>${template.name || "Email Template"}</h1>
+          <p><strong>Subject:</strong> ${template.subject}</p>
+          <h2>HTML Preview:</h2>
+          <div>${htmlContent}</div>
+          <h2>HTML Source:</h2>
+          <pre><code>${htmlContent.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
+        </body>
+        </html>
+      `);
+      printWindow.document.close();
+      setTimeout(() => {
+        printWindow.print();
+        setTimeout(() => printWindow.close(), 100);
+      }, 250);
+    }
+
+    showDownloadedMessage();
+  };
+
+  const showDownloadedMessage = () => {
     setDownloaded(true);
     setOpenDownloadTooltip(true);
     setTimeout(() => {
