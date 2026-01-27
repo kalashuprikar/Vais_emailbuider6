@@ -140,8 +140,12 @@ ${htmlContent.substring(htmlContent.indexOf('<div style="max-width:'), htmlConte
             <Tooltip open={openDownloadTooltip} onOpenChange={setOpenDownloadTooltip}>
               <TooltipTrigger asChild>
                 <Button variant="outline" size="sm" onClick={handleDownloadInlineHTML}>
-                  <Download className="w-4 h-4 mr-2" />
-                  Download Pure HTML
+                  <Download className="w-4 h-4" />
+                  {showDownloadText && (
+                    <span className="ml-2">
+                      {downloaded ? "Downloaded!" : "Download Pure HTML"}
+                    </span>
+                  )}
                 </Button>
               </TooltipTrigger>
               <TooltipContent className="font-medium" side="top">
