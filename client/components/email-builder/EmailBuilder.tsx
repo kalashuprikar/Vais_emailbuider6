@@ -24,6 +24,7 @@ import {
   getTemplatesFromLocalStorage,
   deleteTemplateFromLocalStorage,
   generateId,
+  renderTemplateToHTML,
 } from "./utils";
 import {
   Save,
