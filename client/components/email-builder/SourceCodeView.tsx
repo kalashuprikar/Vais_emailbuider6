@@ -24,7 +24,6 @@ interface SourceCodeViewProps {
 export const SourceCodeView: React.FC<SourceCodeViewProps> = ({ template }) => {
   const [copied, setCopied] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
-  const [showDownloadText, setShowDownloadText] = useState(false);
   const [openTooltip, setOpenTooltip] = useState(false);
   const [openDownloadTooltip, setOpenDownloadTooltip] = useState(false);
 
