@@ -78,6 +78,17 @@ export default function Templates() {
     setSelectedTemplateId(null);
   };
 
+  const handleRedirect = () => {
+    if (redirectUrl.trim()) {
+      const url = redirectUrl.trim();
+      // Check if URL has protocol, if not add https://
+      const finalUrl = url.startsWith("http://") || url.startsWith("https://")
+        ? url
+        : `https://${url}`;
+      window.location.href = finalUrl;
+    }
+  };
+
   const filteredTemplates = templates.filter(
     (template) =>
       template.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
