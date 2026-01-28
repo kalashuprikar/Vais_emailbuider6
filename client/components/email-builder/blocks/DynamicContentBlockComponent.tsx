@@ -26,6 +26,10 @@ export const DynamicContentBlockComponent: React.FC<
           display: "flex",
           alignItems: "center",
           gap: "8px",
+          boxSizing: "border-box",
+          overflow: "hidden",
+          wordWrap: "break-word",
+          overflowWrap: "break-word",
         }}
       >
         <Zap className="w-4 h-4 text-valasys-orange" />
