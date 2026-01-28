@@ -1346,6 +1346,13 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 <Input
                   type="text"
                   placeholder="https://example.com/image.jpg"
+                  value={(block as any).src || ""}
+                  onChange={(e) =>
+                    onBlockUpdate({
+                      ...block,
+                      src: e.target.value,
+                    })
+                  }
                   className="flex-1 focus:ring-valasys-orange focus:ring-2"
                 />
                 <Button variant="outline" size="sm" className="px-2">
@@ -1362,6 +1369,13 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                 <Input
                   type="text"
                   placeholder="Describe the image"
+                  value={(block as any).alt || ""}
+                  onChange={(e) =>
+                    onBlockUpdate({
+                      ...block,
+                      alt: e.target.value,
+                    })
+                  }
                   className="flex-1 focus:ring-valasys-orange focus:ring-2"
                 />
                 <Button variant="outline" size="sm" className="px-2">
