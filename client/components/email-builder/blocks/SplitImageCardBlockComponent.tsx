@@ -94,7 +94,6 @@ export const SplitImageCardBlockComponent: React.FC<
 
           <div className={isImageLeft ? "md:w-3/5" : "md:w-3/5 order-first"}>
             <div className="space-y-3 p-4">
-
               <div>
                 {editMode === "title" ? (
                   <Input
