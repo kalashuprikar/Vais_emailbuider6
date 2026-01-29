@@ -279,7 +279,7 @@ export const CenteredImageCardBlockComponent: React.FC<
                   className="w-full h-auto rounded-lg cursor-pointer"
                   style={{
                     width: block.width ? `${block.width}px` : "100%",
-                    height: block.height ? `${block.height}px` : "auto",
+                    height: "auto",
                     objectFit: "cover",
                     display: "block",
                   }}
