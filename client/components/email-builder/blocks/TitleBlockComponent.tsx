@@ -93,7 +93,7 @@ export const TitleBlockComponent: React.FC<TitleBlockComponentProps> = ({
           onChange={(e) => onContentChange(e.target.value)}
           onBlur={() => onEditingChange?.(null)}
           autoFocus
-          className="w-full border border-valasys-orange rounded px-2 py-1 font-serif"
+          className="w-full rounded px-2 py-1 font-serif outline-none"
           style={textStyle}
         />
       ) : (
