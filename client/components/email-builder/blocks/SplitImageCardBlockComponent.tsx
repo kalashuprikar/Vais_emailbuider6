@@ -132,7 +132,8 @@ export const SplitImageCardBlockComponent: React.FC<
                     }
                     onBlur={() => setEditMode(null)}
                     autoFocus
-                    className="w-full p-3 rounded text-sm text-gray-600 min-h-20 border border-valasys-orange focus:outline-none bg-white"
+                    className="w-full p-3 rounded text-sm text-gray-600 min-h-20 focus:outline-none bg-white"
+                    style={{ border: "1px solid rgb(255, 106, 0)" }}
                   />
                 ) : (
                   <p
