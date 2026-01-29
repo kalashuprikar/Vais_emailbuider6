@@ -422,7 +422,7 @@ export const CenteredImageCardBlockComponent: React.FC<
                     border: "2px solid rgb(255, 106, 0)",
                     boxSizing: "border-box",
                     outline: "none",
-                    backgroundColor: "white"
+                    backgroundColor: "white",
                   }}
                 />
               ) : (
