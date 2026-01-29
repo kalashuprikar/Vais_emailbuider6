@@ -299,32 +299,25 @@ export const SplitImageCardBlockComponent: React.FC<
 
               <div>
                 {editMode === "buttonText" ? (
-                  <Input
-                    value={block.buttonText}
-                    onChange={(e) =>
-                      handleFieldChange("buttonText", e.target.value)
-                    }
-                    onBlur={() => setEditMode(null)}
-                    autoFocus
-                    className="border-2 border-solid border-valasys-orange focus:outline-none"
-                  />
-                ) : (
                   <>
-                    <button
-                      onClick={() => setEditMode("buttonText")}
-                      onMouseEnter={() => setIsHoveringButton(true)}
-                      onMouseLeave={() => setIsHoveringButton(false)}
-                      className="py-2 px-4 bg-valasys-orange text-white rounded text-sm font-bold hover:bg-orange-600 cursor-pointer transition-all"
-                      style={{
-                        border: isHoveringButton ? "2px dashed white" : "none",
-                      }}
-                    >
-                      {block.buttonText}
-                    </button>
-                    {isHoveringButton && (
-                      <SectionToolbar sectionType="buttonText" />
-                    )}
+                    <Input
+                      value={block.buttonText}
+                      onChange={(e) =>
+                        handleFieldChange("buttonText", e.target.value)
+                      }
+                      onBlur={() => setEditMode(null)}
+                      autoFocus
+                      className="border-2 border-solid border-valasys-orange focus:outline-none"
+                    />
+                    <SectionToolbar sectionType="buttonText" />
                   </>
+                ) : (
+                  <button
+                    onClick={() => setEditMode("buttonText")}
+                    className="py-2 px-4 bg-valasys-orange text-white rounded text-sm font-bold hover:bg-orange-600 cursor-pointer transition-all"
+                  >
+                    {block.buttonText}
+                  </button>
                 )}
               </div>
 
