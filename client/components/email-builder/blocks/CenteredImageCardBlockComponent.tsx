@@ -43,10 +43,7 @@ export const CenteredImageCardBlockComponent: React.FC<
     onBlockUpdate({ ...block, [field]: value });
   };
 
-  const handleResizeStart = (
-    e: React.MouseEvent,
-    handle: string,
-  ) => {
+  const handleResizeStart = (e: React.MouseEvent, handle: string) => {
     e.preventDefault();
     e.stopPropagation();
     setIsResizing(true);
@@ -116,7 +113,16 @@ export const CenteredImageCardBlockComponent: React.FC<
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isResizing, resizeHandle, startX, startY, startWidth, startHeight, block, onBlockUpdate]);
+  }, [
+    isResizing,
+    resizeHandle,
+    startX,
+    startY,
+    startWidth,
+    startHeight,
+    block,
+    onBlockUpdate,
+  ]);
 
   const SectionToolbar = ({
     sectionType,
@@ -290,10 +296,30 @@ export const CenteredImageCardBlockComponent: React.FC<
                   <>
                     {/* Corner handles only */}
                     {[
-                      { pos: "nw", cursor: "nw-resize", top: "-4px", left: "-4px" },
-                      { pos: "ne", cursor: "ne-resize", top: "-4px", right: "-4px" },
-                      { pos: "sw", cursor: "sw-resize", bottom: "-4px", left: "-4px" },
-                      { pos: "se", cursor: "se-resize", bottom: "-4px", right: "-4px" },
+                      {
+                        pos: "nw",
+                        cursor: "nw-resize",
+                        top: "-4px",
+                        left: "-4px",
+                      },
+                      {
+                        pos: "ne",
+                        cursor: "ne-resize",
+                        top: "-4px",
+                        right: "-4px",
+                      },
+                      {
+                        pos: "sw",
+                        cursor: "sw-resize",
+                        bottom: "-4px",
+                        left: "-4px",
+                      },
+                      {
+                        pos: "se",
+                        cursor: "se-resize",
+                        bottom: "-4px",
+                        right: "-4px",
+                      },
                     ].map((handle) => (
                       <div
                         key={handle.pos}
@@ -308,7 +334,9 @@ export const CenteredImageCardBlockComponent: React.FC<
                           cursor: handle.cursor,
                           zIndex: 40,
                           ...((handle as any).top && { top: handle.top }),
-                          ...((handle as any).bottom && { bottom: handle.bottom }),
+                          ...((handle as any).bottom && {
+                            bottom: handle.bottom,
+                          }),
                           ...((handle as any).left && { left: handle.left }),
                           ...((handle as any).right && { right: handle.right }),
                         }}
@@ -333,7 +361,9 @@ export const CenteredImageCardBlockComponent: React.FC<
               />
             </label>
           )}
-          {(editMode === "image" || isHoveringImage) && <SectionToolbar sectionType="image" />}
+          {(editMode === "image" || isHoveringImage) && (
+            <SectionToolbar sectionType="image" />
+          )}
         </div>
 
         <div className="space-y-4 text-center">
