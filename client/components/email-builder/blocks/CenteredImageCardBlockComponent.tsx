@@ -34,7 +34,7 @@ export const CenteredImageCardBlockComponent: React.FC<
 
   return (
     <div
-      className={`p-4 rounded-lg transition-all ${
+      className={`rounded-lg transition-all ${
         isSelected ? "ring-2 ring-valasys-orange" : ""
       }`}
       style={{
@@ -42,18 +42,19 @@ export const CenteredImageCardBlockComponent: React.FC<
         border: `${block.borderWidth}px solid ${block.borderColor}`,
         borderRadius: `${block.borderRadius}px`,
         margin: `${block.margin}px`,
+        padding: `${block.padding}px`,
       }}
     >
-      <div className="max-w-md mx-auto">
-        <div className="relative group mb-4">
+      <div className="w-full">
+        <div className="relative group mb-6">
           {block.image ? (
             <>
               <img
                 src={block.image}
                 alt={block.imageAlt}
-                className="w-full h-auto rounded-t-lg"
+                className="w-full h-auto rounded-lg"
               />
-              <label className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-40 opacity-0 group-hover:opacity-100 transition-all cursor-pointer rounded-t-lg">
+              <label className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-40 opacity-0 group-hover:opacity-100 transition-all cursor-pointer rounded-lg">
                 <Upload className="w-6 h-6 text-white" />
                 <input
                   type="file"
@@ -64,7 +65,7 @@ export const CenteredImageCardBlockComponent: React.FC<
               </label>
             </>
           ) : (
-            <label className="flex items-center justify-center w-full h-40 border-2 border-dashed border-gray-300 rounded-t-lg cursor-pointer hover:bg-gray-50">
+            <label className="flex items-center justify-center w-full h-40 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
               <div className="flex flex-col items-center justify-center">
                 <Upload className="w-6 h-6 text-gray-400 mb-2" />
                 <p className="text-sm text-gray-500">Click to upload</p>
@@ -79,9 +80,9 @@ export const CenteredImageCardBlockComponent: React.FC<
           )}
         </div>
 
-        <div className="p-4 space-y-3">
+        <div className="space-y-4 text-center">
           <div>
-            <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
+            <label className="text-xs font-semibold text-gray-600 flex items-center justify-center gap-2 mb-2">
               <Edit2 className="w-3 h-3" />
               Title
             </label>
@@ -94,17 +95,17 @@ export const CenteredImageCardBlockComponent: React.FC<
                 className="text-center font-bold text-lg"
               />
             ) : (
-              <p
+              <h3
                 onClick={() => setEditMode("title")}
-                className="text-center font-bold text-lg text-gray-900 cursor-pointer hover:text-valasys-orange p-2 rounded hover:bg-orange-50"
+                className="font-bold text-xl text-gray-900 cursor-pointer hover:text-valasys-orange transition-colors p-2 rounded hover:bg-orange-50"
               >
                 {block.title}
-              </p>
+              </h3>
             )}
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
+            <label className="text-xs font-semibold text-gray-600 flex items-center justify-center gap-2 mb-2">
               <Edit2 className="w-3 h-3" />
               Description
             </label>
@@ -116,22 +117,22 @@ export const CenteredImageCardBlockComponent: React.FC<
                 }
                 onBlur={() => setEditMode(null)}
                 autoFocus
-                className="w-full p-2 border border-gray-300 rounded text-sm text-gray-600 min-h-16"
+                className="w-full p-2 border border-gray-300 rounded text-sm text-gray-600 min-h-24"
               />
             ) : (
               <p
                 onClick={() => setEditMode("description")}
-                className="text-center text-sm text-gray-600 cursor-pointer hover:text-valasys-orange p-2 rounded hover:bg-orange-50"
+                className="text-sm text-gray-600 cursor-pointer hover:text-valasys-orange transition-colors p-2 rounded hover:bg-orange-50 whitespace-pre-wrap break-words"
               >
                 {block.description}
               </p>
             )}
           </div>
 
-          <div>
-            <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
+          <div className="pt-2">
+            <label className="text-xs font-semibold text-gray-600 flex items-center justify-center gap-2 mb-3">
               <Edit2 className="w-3 h-3" />
-              Button Text
+              Button
             </label>
             {editMode === "buttonText" ? (
               <Input
@@ -144,17 +145,19 @@ export const CenteredImageCardBlockComponent: React.FC<
                 className="text-center"
               />
             ) : (
-              <button
-                onClick={() => setEditMode("buttonText")}
-                className="w-full py-2 px-4 bg-valasys-orange text-white rounded text-sm font-bold hover:bg-orange-600 cursor-pointer"
-              >
-                {block.buttonText}
-              </button>
+              <div className="flex justify-center">
+                <button
+                  onClick={() => setEditMode("buttonText")}
+                  className="inline-block py-2 px-6 bg-valasys-orange text-white rounded text-sm font-bold hover:bg-orange-600 cursor-pointer transition-colors"
+                >
+                  {block.buttonText}
+                </button>
+              </div>
             )}
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-gray-600 flex items-center gap-2">
+            <label className="text-xs font-semibold text-gray-600 flex items-center justify-center gap-2 mb-2">
               <Edit2 className="w-3 h-3" />
               Button Link
             </label>
@@ -167,12 +170,12 @@ export const CenteredImageCardBlockComponent: React.FC<
                 onBlur={() => setEditMode(null)}
                 autoFocus
                 placeholder="https://example.com"
-                className="text-sm"
+                className="text-sm text-center"
               />
             ) : (
               <p
                 onClick={() => setEditMode("buttonLink")}
-                className="text-xs text-gray-500 cursor-pointer hover:text-valasys-orange p-2 rounded hover:bg-orange-50 break-all"
+                className="text-xs text-gray-500 cursor-pointer hover:text-valasys-orange p-2 rounded hover:bg-orange-50 break-all transition-colors"
               >
                 {block.buttonLink || "No link set"}
               </p>
