@@ -174,7 +174,9 @@ export const BlockActions: React.FC<BlockActionsProps> = ({
         variant="ghost"
         size="sm"
         className="h-8 w-8 p-0 hover:bg-gray-100"
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
           onDuplicate(block, blockIndex + 1);
         }}
         title="Duplicate block"
