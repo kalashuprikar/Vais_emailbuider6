@@ -140,27 +140,19 @@ export const EmailBuilder: React.FC<EmailBuilderProps> = ({
 
   const handleDuplicateBlock = useCallback(
     (block: ContentBlock, position: number) => {
-      try {
-        console.log("✅ handleDuplicateBlock called:", { position, blockType: block.type });
-        const duplicatedBlock: ContentBlock = {
-          ...JSON.parse(JSON.stringify(block)),
-          id: generateId(),
+      const duplicatedBlock: ContentBlock = {
+        ...JSON.parse(JSON.stringify(block)),
+        id: generateId(),
+      };
+      setTemplate((prev) => {
+        const newBlocks = [...prev.blocks];
+        newBlocks.splice(position, 0, duplicatedBlock);
+        return {
+          ...prev,
+          blocks: newBlocks,
+          updatedAt: new Date().toISOString(),
         };
-        console.log("✅ Duplicated block created with new ID:", duplicatedBlock.id);
-
-        setTemplate((prev) => {
-          const newBlocks = [...prev.blocks];
-          newBlocks.splice(position, 0, duplicatedBlock);
-          console.log("✅ Template updated! New block count:", newBlocks.length);
-          return {
-            ...prev,
-            blocks: newBlocks,
-            updatedAt: new Date().toISOString(),
-          };
-        });
-      } catch (error) {
-        console.error("❌ Error in handleDuplicateBlock:", error);
-      }
+      });
     },
     [],
   );
