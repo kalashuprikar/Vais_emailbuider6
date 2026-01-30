@@ -5901,6 +5901,44 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                   )}
                 </div>
 
+                {selectedCard.image && (
+                  <div>
+                    <Label className="text-xs font-semibold text-gray-700 mb-2 block">
+                      Image Link Type
+                    </Label>
+                    <select
+                      value={selectedCard.imageLinkType || "url"}
+                      onChange={(e) =>
+                        handleCardUpdate("imageLinkType", e.target.value)
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-valasys-orange"
+                    >
+                      <option value="url">URL</option>
+                      <option value="email">Email</option>
+                    </select>
+                  </div>
+                )}
+
+                {selectedCard.image && (
+                  <div>
+                    <Label className="text-xs font-semibold text-gray-700 mb-2 block">
+                      Image Link
+                    </Label>
+                    <Input
+                      value={selectedCard.imageLink || ""}
+                      onChange={(e) =>
+                        handleCardUpdate("imageLink", e.target.value)
+                      }
+                      placeholder={
+                        selectedCard.imageLinkType === "email"
+                          ? "example@email.com"
+                          : "https://example.com"
+                      }
+                      className="text-xs focus:ring-valasys-orange focus:ring-2"
+                    />
+                  </div>
+                )}
+
                 <div>
                   <h4 className="text-xs font-bold text-gray-900 mb-3">
                     Styling
