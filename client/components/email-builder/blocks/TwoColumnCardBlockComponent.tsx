@@ -175,6 +175,9 @@ export const TwoColumnCardBlockComponent: React.FC<
                         }
                         target={card.imageLinkType === "email" ? undefined : "_blank"}
                         rel={card.imageLinkType === "email" ? undefined : "noopener noreferrer"}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
                         style={{
                           textDecoration: "none",
                           display: "block",
