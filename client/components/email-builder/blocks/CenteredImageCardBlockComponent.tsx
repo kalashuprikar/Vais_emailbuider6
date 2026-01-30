@@ -20,6 +20,8 @@ export const CenteredImageCardBlockComponent: React.FC<
   block,
   isSelected,
   onBlockUpdate,
+  onDuplicate,
+  blockIndex = 0,
 }) => {
   const [editMode, setEditMode] = useState<string | null>(null);
   const [isResizing, setIsResizing] = useState(false);
