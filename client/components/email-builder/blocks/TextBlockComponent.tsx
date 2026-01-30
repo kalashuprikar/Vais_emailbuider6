@@ -1,6 +1,6 @@
 import React from "react";
 import { TextBlock } from "../types";
-import { Edit2 } from "lucide-react";
+import { Edit2, Copy, Trash2 } from "lucide-react";
 
 interface TextBlockComponentProps {
   block: TextBlock;
@@ -9,6 +9,9 @@ interface TextBlockComponentProps {
   onEdit: () => void;
   onEditingChange?: (id: string | null) => void;
   onContentChange: (content: string) => void;
+  onDuplicate?: (block: TextBlock, position: number) => void;
+  onDelete?: (blockId: string) => void;
+  blockIndex?: number;
 }
 
 export const TextBlockComponent: React.FC<TextBlockComponentProps> = ({
