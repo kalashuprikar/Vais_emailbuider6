@@ -17,7 +17,7 @@ const generateId = () =>
 
 export const SplitImageCardBlockComponent: React.FC<
   SplitImageCardBlockComponentProps
-> = ({ block, isSelected, onBlockUpdate, onDuplicate, blockIndex = 0 }) => {
+> = ({ block, isSelected, onBlockUpdate, blockIndex = 0 }) => {
   const [editMode, setEditMode] = useState<string | null>(null);
   const [isHoveringImage, setIsHoveringImage] = useState(false);
   const [imageUrlInput, setImageUrlInput] = useState("");
