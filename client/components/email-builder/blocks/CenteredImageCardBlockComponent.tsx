@@ -4,17 +4,27 @@ import { ContentBlock } from "../types";
 import { Upload, Edit2, Plus, Copy, Trash2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 interface CenteredImageCardBlockComponentProps {
   block: CenteredImageCardBlock;
   isSelected: boolean;
   onBlockUpdate: (block: CenteredImageCardBlock) => void;
   blockIndex?: number;
+  onDuplicate?: (block: CenteredImageCardBlock, position: number) => void;
+  onDelete?: () => void;
 }
 
 export const CenteredImageCardBlockComponent: React.FC<
   CenteredImageCardBlockComponentProps
-> = ({ block, isSelected, onBlockUpdate, blockIndex = 0 }) => {
+> = ({
+  block,
+  isSelected,
+  onBlockUpdate,
+  blockIndex = 0,
+  onDuplicate,
+  onDelete,
+}) => {
   const [editMode, setEditMode] = useState<string | null>(null);
   const [isResizing, setIsResizing] = useState(false);
   const [resizeHandle, setResizeHandle] = useState<string | null>(null);
@@ -135,12 +145,24 @@ export const CenteredImageCardBlockComponent: React.FC<
   }) => {
     const handleCopy = () => {
       let contentToCopy = "";
-      if (sectionType === "title") contentToCopy = block.title;
-      else if (sectionType === "description") contentToCopy = block.description;
-      else if (sectionType === "buttonText") contentToCopy = block.buttonText;
-      else if (sectionType === "image") contentToCopy = block.image;
+      let successMessage = "";
+
+      if (sectionType === "title") {
+        contentToCopy = block.title;
+        successMessage = "Title copied to clipboard!";
+      } else if (sectionType === "description") {
+        contentToCopy = block.description;
+        successMessage = "Description copied to clipboard!";
+      } else if (sectionType === "buttonText") {
+        contentToCopy = block.buttonText;
+        successMessage = "Button text copied to clipboard!";
+      } else if (sectionType === "image") {
+        contentToCopy = block.image;
+        successMessage = "Image URL copied to clipboard!";
+      }
 
       if (!contentToCopy) {
+        toast.error("Content is empty");
         return;
       }
 
@@ -155,8 +177,9 @@ export const CenteredImageCardBlockComponent: React.FC<
         textArea.select();
         document.execCommand("copy");
         document.body.removeChild(textArea);
+        toast.success(successMessage);
       } catch (err) {
-        // Silently fail if copy doesn't work
+        toast.error("Failed to copy");
         console.error("Copy failed:", err);
       }
     };
@@ -366,9 +389,6 @@ export const CenteredImageCardBlockComponent: React.FC<
               />
             </label>
           )}
-          {(editMode === "image" || isHoveringImage) && (
-            <SectionToolbar sectionType="image" />
-          )}
         </div>
 
         <div className="space-y-4 text-center">
@@ -398,7 +418,6 @@ export const CenteredImageCardBlockComponent: React.FC<
                   {block.title}
                 </h3>
               )}
-              {editMode === "title" && <SectionToolbar sectionType="title" />}
             </div>
           )}
 
@@ -440,9 +459,6 @@ export const CenteredImageCardBlockComponent: React.FC<
                   {block.description}
                 </p>
               )}
-              {editMode === "description" && (
-                <SectionToolbar sectionType="description" />
-              )}
             </div>
           )}
 
@@ -473,9 +489,6 @@ export const CenteredImageCardBlockComponent: React.FC<
                     {block.buttonText}
                   </button>
                 </div>
-              )}
-              {editMode === "buttonText" && (
-                <SectionToolbar sectionType="buttonText" />
               )}
             </div>
           )}
@@ -512,6 +525,46 @@ export const CenteredImageCardBlockComponent: React.FC<
             </div>
           )}
         </div>
+
+        {isSelected && (onDuplicate || onDelete) && (
+          <div className="flex justify-end mt-4 gap-1">
+            <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-2 shadow-sm">
+              {onDuplicate && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 w-8 p-0 hover:bg-gray-100"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDuplicate(block, blockIndex + 1);
+                  }}
+                  title="Duplicate block"
+                >
+                  <Copy className="w-4 h-4 text-gray-700" />
+                </Button>
+              )}
+
+              {onDelete && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 w-8 p-0 hover:bg-red-100"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete();
+                  }}
+                  title="Delete block"
+                >
+                  <Trash2 className="w-4 h-4 text-red-600" />
+                </Button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

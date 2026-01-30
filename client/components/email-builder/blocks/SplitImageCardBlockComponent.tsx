@@ -9,11 +9,21 @@ interface SplitImageCardBlockComponentProps {
   block: SplitImageCardBlock;
   isSelected: boolean;
   onBlockUpdate: (block: SplitImageCardBlock) => void;
+  onDuplicate?: (block: SplitImageCardBlock, position: number) => void;
+  onDelete?: () => void;
+  blockIndex?: number;
 }
 
 export const SplitImageCardBlockComponent: React.FC<
   SplitImageCardBlockComponentProps
-> = ({ block, isSelected, onBlockUpdate }) => {
+> = ({
+  block,
+  isSelected,
+  onBlockUpdate,
+  onDuplicate,
+  onDelete,
+  blockIndex = 0,
+}) => {
   const [editMode, setEditMode] = useState<string | null>(null);
   const [isHoveringTitle, setIsHoveringTitle] = useState(false);
   const [isHoveringDescription, setIsHoveringDescription] = useState(false);
@@ -65,150 +75,6 @@ export const SplitImageCardBlockComponent: React.FC<
     }
   };
 
-  const SectionToolbar = ({
-    sectionType,
-  }: {
-    sectionType:
-      | "image"
-      | "title"
-      | "description"
-      | "buttonText"
-      | "buttonLink";
-  }) => {
-    const handleCopy = () => {
-      if (sectionType === "title") {
-        if (block.title) {
-          const newTitle = block.title + "\n" + block.title;
-          onBlockUpdate({ ...block, title: newTitle });
-          toast.success("Title duplicated!");
-        } else {
-          toast.error("Title is empty");
-        }
-      } else if (sectionType === "description") {
-        if (block.description) {
-          const newDescription = block.description + "\n" + block.description;
-          onBlockUpdate({ ...block, description: newDescription });
-          toast.success("Description duplicated!");
-        } else {
-          toast.error("Description is empty");
-        }
-      } else if (sectionType === "buttonText") {
-        if (block.buttonText) {
-          const newButtonText = block.buttonText + " " + block.buttonText;
-          onBlockUpdate({ ...block, buttonText: newButtonText });
-          toast.success("Button text duplicated!");
-        } else {
-          toast.error("Button text is empty");
-        }
-      } else if (sectionType === "buttonLink") {
-        if (block.buttonLink) {
-          try {
-            const textArea = document.createElement("textarea");
-            textArea.value = block.buttonLink;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand("copy");
-            document.body.removeChild(textArea);
-            toast.success("Link copied to clipboard!");
-          } catch (err) {
-            toast.error("Failed to copy link");
-          }
-        } else {
-          toast.error("Link is empty");
-        }
-      } else if (sectionType === "image") {
-        if (block.image) {
-          try {
-            const textArea = document.createElement("textarea");
-            textArea.value = block.image;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand("copy");
-            document.body.removeChild(textArea);
-            toast.success("Image URL copied!");
-          } catch (err) {
-            toast.error("Failed to copy image URL");
-          }
-        } else {
-          toast.error("Image URL is empty");
-        }
-      }
-    };
-
-    const handleDelete = () => {
-      if (sectionType === "title") {
-        onBlockUpdate({ ...block, title: "" });
-        setEditMode(null);
-      } else if (sectionType === "description") {
-        onBlockUpdate({ ...block, description: "" });
-        setEditMode(null);
-      } else if (sectionType === "buttonText") {
-        onBlockUpdate({ ...block, buttonText: "" });
-        setEditMode(null);
-      } else if (sectionType === "buttonLink") {
-        onBlockUpdate({ ...block, buttonLink: "" });
-        setEditMode(null);
-      } else if (sectionType === "image") {
-        onBlockUpdate({ ...block, image: "" });
-        setEditMode(null);
-      }
-    };
-
-    const handleAdd = () => {
-      if (sectionType === "title" || sectionType === "description") {
-        setEditMode(sectionType);
-      }
-    };
-
-    return (
-      <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-2 shadow-sm mt-2 w-fit">
-        {sectionType !== "image" && (
-          <Button
-            variant="ghost"
-            size="sm"
-            className="h-7 w-7 p-0 hover:bg-gray-100"
-            title="Add"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              handleAdd();
-            }}
-          >
-            <Plus className="w-3 h-3 text-gray-700" />
-          </Button>
-        )}
-
-        <Button
-          variant="ghost"
-          size="sm"
-          className="h-7 w-7 p-0 hover:bg-gray-100"
-          title="Copy"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            handleCopy();
-          }}
-        >
-          <Copy className="w-3 h-3 text-gray-700" />
-        </Button>
-
-        <Button
-          variant="ghost"
-          size="sm"
-          className="h-7 w-7 p-0 hover:bg-red-100"
-          title="Delete"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            handleDelete();
-          }}
-        >
-          <Trash2 className="w-3 h-3 text-red-600" />
-        </Button>
-      </div>
-    );
-  };
-
   const isImageLeft = block.imagePosition === "left";
 
   return (
@@ -257,11 +123,6 @@ export const SplitImageCardBlockComponent: React.FC<
                       className="hidden"
                     />
                   </label>
-                  {isHoveringImage && (
-                    <div className="absolute bottom-0 left-0 right-0 z-50">
-                      <SectionToolbar sectionType="image" />
-                    </div>
-                  )}
                 </div>
               ) : (
                 <div className="space-y-2">
@@ -333,9 +194,6 @@ export const SplitImageCardBlockComponent: React.FC<
                       {block.title}
                     </p>
                   )}
-                  {editMode === "title" && (
-                    <SectionToolbar sectionType="title" />
-                  )}
                 </div>
               )}
 
@@ -378,9 +236,6 @@ export const SplitImageCardBlockComponent: React.FC<
                       {block.description}
                     </p>
                   )}
-                  {editMode === "description" && (
-                    <SectionToolbar sectionType="description" />
-                  )}
                 </div>
               )}
 
@@ -410,9 +265,6 @@ export const SplitImageCardBlockComponent: React.FC<
                     >
                       {block.buttonText}
                     </button>
-                  )}
-                  {editMode === "buttonText" && (
-                    <SectionToolbar sectionType="buttonText" />
                   )}
                 </div>
               )}
@@ -446,9 +298,6 @@ export const SplitImageCardBlockComponent: React.FC<
                     >
                       {block.buttonLink || "#"}
                     </p>
-                  )}
-                  {editMode === "buttonLink" && (
-                    <SectionToolbar sectionType="buttonLink" />
                   )}
                 </div>
               )}
@@ -489,11 +338,6 @@ export const SplitImageCardBlockComponent: React.FC<
                       className="hidden"
                     />
                   </label>
-                  {isHoveringImage && (
-                    <div className="absolute bottom-0 left-0 right-0 z-50">
-                      <SectionToolbar sectionType="image" />
-                    </div>
-                  )}
                 </div>
               ) : (
                 <div className="space-y-2">
@@ -535,7 +379,7 @@ export const SplitImageCardBlockComponent: React.FC<
           )}
         </div>
 
-        <div className="mt-4 flex gap-2 justify-end">
+        <div className="mt-4 flex gap-2 justify-between">
           <Button
             onClick={toggleImagePosition}
             variant="outline"
@@ -544,6 +388,44 @@ export const SplitImageCardBlockComponent: React.FC<
           >
             Swap Image Position
           </Button>
+
+          {isSelected && (onDuplicate || onDelete) && (
+            <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-2 shadow-sm">
+              {onDuplicate && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 w-8 p-0 hover:bg-gray-100"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDuplicate(block, blockIndex + 1);
+                  }}
+                  title="Duplicate block"
+                >
+                  <Copy className="w-4 h-4 text-gray-700" />
+                </Button>
+              )}
+
+              {onDelete && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 w-8 p-0 hover:bg-red-100"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete();
+                  }}
+                  title="Delete block"
+                >
+                  <Trash2 className="w-4 h-4 text-red-600" />
+                </Button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
