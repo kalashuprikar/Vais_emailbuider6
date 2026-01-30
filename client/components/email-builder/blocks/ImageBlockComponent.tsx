@@ -1,12 +1,15 @@
 import React, { useRef, useState } from "react";
 import { ImageBlock } from "../types";
-import { Upload } from "lucide-react";
+import { Upload, Copy, Trash2 } from "lucide-react";
 
 interface ImageBlockComponentProps {
   block: ImageBlock;
   isSelected: boolean;
   onSrcChange: (src: string) => void;
   onDimensionChange: (width: number, height: number) => void;
+  onDuplicate?: (block: ImageBlock, position: number) => void;
+  onDelete?: (blockId: string) => void;
+  blockIndex?: number;
 }
 
 export const ImageBlockComponent: React.FC<ImageBlockComponentProps> = ({
