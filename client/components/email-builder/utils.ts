@@ -1156,18 +1156,28 @@ export function renderBlockToHTML(block: ContentBlock): string {
           : "";
       const imageSide = splitBlock.imagePosition === "left" ? "45%" : "55%";
       const contentSide = splitBlock.imagePosition === "left" ? "55%" : "45%";
-      const direction = splitBlock.imagePosition === "left" ? "ltr" : "rtl";
+
+      // Create content cell HTML
+      const contentCell = `<td width="${contentSide}" style="vertical-align: top; padding: 15px;">
+        <h2 style="margin: 0 0 12px 0; font-size: 20px; font-weight: bold; color: #000;">${splitBlock.title}</h2>
+        <p style="margin: 0 0 16px 0; font-size: 14px; color: #666; line-height: 1.5; white-space: pre-line;">${splitBlock.description}</p>
+        <a href="${splitBlock.buttonLink}" style="display: inline-block; background-color: #FF6A00; color: #ffffff; padding: 10px 24px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px;">${splitBlock.buttonText}</a>
+      </td>`;
+
+      // Create image cell HTML
+      const imageCell = `<td width="${imageSide}" style="vertical-align: middle; padding: 15px; text-align: center;">
+        <img src="${splitBlock.image}" alt="${splitBlock.imageAlt}" style="width: 100%; height: 250px; object-fit: cover; display: block; border-radius: 4px;" />
+      </td>`;
+
+      // Arrange cells based on imagePosition
+      const cells = splitBlock.imagePosition === "left"
+        ? imageCell + contentCell
+        : contentCell + imageCell;
+
       return `<div style="background-color: ${splitBlock.backgroundColor}; border-radius: ${splitBlock.borderRadius}px; ${borderStyle} margin: ${splitBlock.margin}px; max-width: 600px; margin-left: auto; margin-right: auto; overflow: hidden;">
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td width="${imageSide}" style="vertical-align: middle; padding: 15px; text-align: center;">
-              <img src="${splitBlock.image}" alt="${splitBlock.imageAlt}" style="width: 100%; height: 250px; object-fit: cover; display: block; border-radius: 4px;" />
-            </td>
-            <td width="${contentSide}" style="vertical-align: top; padding: 15px;">
-              <h2 style="margin: 0 0 12px 0; font-size: 20px; font-weight: bold; color: #000;">${splitBlock.title}</h2>
-              <p style="margin: 0 0 16px 0; font-size: 14px; color: #666; line-height: 1.5; white-space: pre-line;">${splitBlock.description}</p>
-              <a href="${splitBlock.buttonLink}" style="display: inline-block; background-color: #FF6A00; color: #ffffff; padding: 10px 24px; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px;">${splitBlock.buttonText}</a>
-            </td>
+            ${cells}
           </tr>
         </table>
       </div>`;
