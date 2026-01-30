@@ -332,11 +332,6 @@ export const SplitImageCardBlockComponent: React.FC<
                       className="hidden"
                     />
                   </label>
-                  {isHoveringImage && (
-                    <div className="absolute bottom-0 left-0 right-0 z-50">
-                      <SectionToolbar sectionType="image" />
-                    </div>
-                  )}
                 </div>
               ) : (
                 <div className="space-y-2">
