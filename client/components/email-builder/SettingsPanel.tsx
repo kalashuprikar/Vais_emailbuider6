@@ -5879,7 +5879,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                       </button>
                     </div>
                   ) : (
-                    <label className="block w-full px-3 py-2 border-2 border-dashed border-gray-300 rounded text-center cursor-pointer hover:bg-gray-50">
+                    <label className="block w-full px-3 py-3 bg-gray-100 rounded text-center cursor-pointer hover:bg-gray-200 transition-colors border border-gray-300">
                       <p className="text-xs text-gray-600">Click to upload</p>
                       <input
                         type="file"
