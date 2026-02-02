@@ -378,7 +378,7 @@ export default function PerformanceAnalytics() {
         <TabsContent value="comparison" className="space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {comparisonData.map((item, index) => (
-              <Card key={index}>
+              <Card key={index} className="content-section-hover">
                 <CardContent className="p-4 sm:p-6">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="text-xs sm:text-sm font-medium text-valasys-gray-600 truncate">
