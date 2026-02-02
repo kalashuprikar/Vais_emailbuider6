@@ -6063,6 +6063,103 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
                     </select>
                   </div>
                 </div>
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Card Height
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="text"
+                      inputMode="numeric"
+                      value={twoCardHeightInput}
+                      onChange={(e) => {
+                        const inputValue = e.target.value;
+                        const numericValue = inputValue.replace(/[^\d]/g, "");
+
+                        setTwoCardHeightInput(inputValue);
+
+                        if (numericValue !== "") {
+                          const num = parseInt(numericValue);
+                          const maxValue =
+                            (twoColBlock as any).heightUnit === "%" ? 100 : 1000;
+                          if (num >= 1 && num <= maxValue) {
+                            onBlockUpdate({
+                              ...twoColBlock,
+                              height: num,
+                            });
+                          }
+                        }
+                      }}
+                      onBlur={(e) => {
+                        const inputValue = e.target.value;
+                        const numericValue = inputValue.replace(/[^\d]/g, "");
+                        if (numericValue === "") {
+                          onBlockUpdate({
+                            ...twoColBlock,
+                            height: 300,
+                          });
+                          setTwoCardHeightInput("300");
+                        } else {
+                          const num = parseInt(numericValue);
+                          const maxValue =
+                            (twoColBlock as any).heightUnit === "%" ? 100 : 1000;
+                          if (num > maxValue) {
+                            onBlockUpdate({
+                              ...twoColBlock,
+                              height: maxValue,
+                            });
+                            setTwoCardHeightInput(String(maxValue));
+                          } else if (num < 1) {
+                            onBlockUpdate({
+                              ...twoColBlock,
+                              height: 1,
+                            });
+                            setTwoCardHeightInput("1");
+                          }
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "ArrowUp") {
+                          e.preventDefault();
+                          const currentHeight =
+                            parseInt(twoCardHeightInput) || 300;
+                          const maxValue =
+                            (twoColBlock as any).heightUnit === "%" ? 100 : 1000;
+                          const newHeight = Math.min(currentHeight + 1, maxValue);
+                          onBlockUpdate({
+                            ...twoColBlock,
+                            height: newHeight,
+                          });
+                          setTwoCardHeightInput(String(newHeight));
+                        } else if (e.key === "ArrowDown") {
+                          e.preventDefault();
+                          const currentHeight =
+                            parseInt(twoCardHeightInput) || 300;
+                          const newHeight = Math.max(1, currentHeight - 1);
+                          onBlockUpdate({
+                            ...twoColBlock,
+                            height: newHeight,
+                          });
+                          setTwoCardHeightInput(String(newHeight));
+                        }
+                      }}
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <select
+                      value={(twoColBlock as any).heightUnit || "px"}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...twoColBlock,
+                          heightUnit: e.target.value as "px" | "%",
+                        })
+                      }
+                      className="px-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange"
+                    >
+                      <option value="%">%</option>
+                      <option value="px">px</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
 
