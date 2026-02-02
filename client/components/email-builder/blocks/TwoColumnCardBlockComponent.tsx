@@ -10,41 +10,6 @@ interface TwoColumnCardBlockComponentProps {
   onUpdate: (block: TwoColumnCardBlock) => void;
 }
 
-interface FieldToolbarProps {
-  cardId: string;
-  fieldName: string;
-  fieldValue: string;
-  onCopy: (value: string, fieldName: string) => void;
-  onDelete: (cardId: string, fieldName: string) => void;
-}
-
-const FieldToolbar: React.FC<FieldToolbarProps> = ({
-  cardId,
-  fieldName,
-  fieldValue,
-  onCopy,
-  onDelete,
-}) => {
-  return (
-    <div className="absolute top-1 right-1 flex gap-1 bg-white rounded shadow-lg p-1 z-50">
-      <button
-        onClick={() => onCopy(fieldValue, fieldName)}
-        className="p-1 hover:bg-gray-100 rounded transition-colors"
-        title="Copy"
-      >
-        <span className="text-xs">📋</span>
-      </button>
-      <button
-        onClick={() => onDelete(cardId, fieldName)}
-        className="p-1 hover:bg-red-100 rounded transition-colors"
-        title="Delete"
-      >
-        <span className="text-xs">🗑️</span>
-      </button>
-    </div>
-  );
-};
-
 export const TwoColumnCardBlockComponent: React.FC<
   TwoColumnCardBlockComponentProps
 > = ({ block, isSelected, onUpdate }) => {
