@@ -339,10 +339,9 @@ export const SplitImageCardBlockComponent: React.FC<
       });
       onBlockUpdate({ ...block, buttons: newButtons });
 
-      // Copy to clipboard with styling
-      const styledContent = `<a href="${buttonToDuplicate.link}" style="display: inline-block; padding: 8px 16px; background-color: rgb(255, 106, 35); color: white; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 14px;">${buttonToDuplicate.text}</a>`;
+      // Copy to clipboard
       const buttonText = `${buttonToDuplicate.text} (${buttonToDuplicate.link})`;
-      const success = await copyToClipboard(buttonText, styledContent);
+      const success = await copyToClipboard(buttonText);
       if (success) {
         toast({
           title: "Copied!",
