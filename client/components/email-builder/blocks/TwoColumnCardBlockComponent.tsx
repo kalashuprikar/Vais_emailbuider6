@@ -150,8 +150,7 @@ export const TwoColumnCardBlockComponent: React.FC<
   };
 
   const handleCopyStyledTitle = async (text: string) => {
-    const styledContent = `<h3 style="font-weight: 700; font-size: 16px; border: 2px solid rgb(255, 106, 0); padding: 8px; border-radius: 4px; margin: 0;">${text}</h3>`;
-    const success = await copyToClipboard(text, styledContent);
+    const success = await copyToClipboard(text);
     if (success) {
       toast({
         title: "Copied!",
@@ -169,8 +168,7 @@ export const TwoColumnCardBlockComponent: React.FC<
   };
 
   const handleCopyStyledDescription = async (text: string) => {
-    const styledContent = `<p style="font-size: 12px; border: 2px solid rgb(255, 106, 0); padding: 8px; border-radius: 4px; margin: 0; line-height: 1.4;">${text}</p>`;
-    const success = await copyToClipboard(text, styledContent);
+    const success = await copyToClipboard(text);
     if (success) {
       toast({
         title: "Copied!",
