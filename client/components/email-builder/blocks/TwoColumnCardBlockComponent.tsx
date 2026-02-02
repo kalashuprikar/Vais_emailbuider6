@@ -163,11 +163,7 @@ export const TwoColumnCardBlockComponent: React.FC<
     }
   };
 
-  const handleCopyStyledTitle = async (text: string) => {
-    await copyToClipboard(text);
-  };
-
-  const handleCopyStyledDescription = async (text: string) => {
+  const handleCopyText = async (text: string) => {
     await copyToClipboard(text);
   };
 
@@ -187,6 +183,7 @@ export const TwoColumnCardBlockComponent: React.FC<
       card.id === cardId ? { ...card, [fieldName]: "" } : card,
     );
     onUpdate({ ...block, cards: updatedCards });
+    setFocusedField(null);
   };
 
   const FieldToolbar = ({
@@ -203,7 +200,7 @@ export const TwoColumnCardBlockComponent: React.FC<
     onDelete: (cardId: string, fieldName: "title" | "description") => void;
   }) => {
     return (
-      <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-2 shadow-sm mt-2">
+      <div className="flex items-center gap-1 bg-white border border-gray-200 rounded-lg p-2 shadow-sm mt-2 w-fit">
         <Button
           variant="ghost"
           size="sm"
@@ -453,11 +450,7 @@ export const TwoColumnCardBlockComponent: React.FC<
                     cardId={card.id}
                     fieldName="title"
                     fieldValue={editingValue}
-                    onCopy={(value, fieldName) =>
-                      fieldName === "title"
-                        ? handleCopyStyledTitle(value)
-                        : handleCopyStyledDescription(value)
-                    }
+                    onCopy={(value, fieldName) => handleCopyText(value)}
                     onDelete={handleDeleteField}
                   />
                 </>
@@ -490,11 +483,7 @@ export const TwoColumnCardBlockComponent: React.FC<
                       cardId={card.id}
                       fieldName="title"
                       fieldValue={card.title}
-                      onCopy={(value, fieldName) =>
-                        fieldName === "title"
-                          ? handleCopyStyledTitle(value)
-                          : handleCopyStyledDescription(value)
-                      }
+                      onCopy={(value, fieldName) => handleCopyText(value)}
                       onDelete={handleDeleteField}
                     />
                   )}
@@ -524,11 +513,7 @@ export const TwoColumnCardBlockComponent: React.FC<
                     cardId={card.id}
                     fieldName="description"
                     fieldValue={editingValue}
-                    onCopy={(value, fieldName) =>
-                      fieldName === "title"
-                        ? handleCopyStyledTitle(value)
-                        : handleCopyStyledDescription(value)
-                    }
+                    onCopy={(value, fieldName) => handleCopyText(value)}
                     onDelete={handleDeleteField}
                   />
                 </>
@@ -561,11 +546,7 @@ export const TwoColumnCardBlockComponent: React.FC<
                       cardId={card.id}
                       fieldName="description"
                       fieldValue={card.description}
-                      onCopy={(value, fieldName) =>
-                        fieldName === "title"
-                          ? handleCopyStyledTitle(value)
-                          : handleCopyStyledDescription(value)
-                      }
+                      onCopy={(value, fieldName) => handleCopyText(value)}
                       onDelete={handleDeleteField}
                     />
                   )}
