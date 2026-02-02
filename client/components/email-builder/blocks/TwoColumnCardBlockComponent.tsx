@@ -384,42 +384,62 @@ export const TwoColumnCardBlockComponent: React.FC<
               }}
             >
               {editingField === `${card.id}-title` ? (
-                <input
-                  type="text"
-                  autoFocus
-                  value={editingValue}
-                  onChange={(e) => setEditingValue(e.target.value)}
-                  onBlur={() => handleSaveEdit(card.id, "title")}
-                  onKeyPress={(e) => handleKeyPress(e, card.id, "title")}
-                  className="w-full font-bold text-base mb-2 m-0 p-1 border-2 border-valasys-orange rounded"
-                  style={{
-                    color: card.textColor,
-                    backgroundColor: "transparent",
-                  }}
-                />
+                <>
+                  <input
+                    type="text"
+                    autoFocus
+                    value={editingValue}
+                    onChange={(e) => setEditingValue(e.target.value)}
+                    onBlur={() => handleSaveEdit(card.id, "title")}
+                    onKeyPress={(e) => handleKeyPress(e, card.id, "title")}
+                    className="w-full font-bold text-base mb-2 m-0 p-1 border-2 border-valasys-orange rounded"
+                    style={{
+                      color: card.textColor,
+                      backgroundColor: "transparent",
+                    }}
+                  />
+                  <FieldToolbar
+                    cardId={card.id}
+                    fieldName="title"
+                    fieldValue={editingValue}
+                    onDuplicate={handleDuplicateText}
+                    onDelete={handleDeleteField}
+                  />
+                </>
               ) : (
-                <h3
-                  className="font-bold text-base mb-2 m-0 cursor-pointer px-2 py-1 rounded transition-all"
-                  style={{
-                    color: card.textColor,
-                    border:
-                      focusedField === `${card.id}-title`
-                        ? "2px solid rgb(255, 106, 0)"
-                        : hoveredField === `${card.id}-title`
-                          ? "2px dotted rgb(255, 106, 0)"
-                          : "2px solid transparent",
-                  }}
-                  onClick={() => setFocusedField(`${card.id}-title`)}
-                  onDoubleClick={() =>
-                    handleStartEditingField(card.id, "title")
-                  }
+                <div
                   onMouseEnter={() => setHoveredField(`${card.id}-title`)}
                   onMouseLeave={() => setHoveredField(null)}
-                  onBlur={() => setFocusedField(null)}
-                  title="Double-click to edit"
                 >
-                  {card.title}
-                </h3>
+                  <h3
+                    className="font-bold text-base mb-2 m-0 cursor-pointer px-2 py-1 rounded transition-all"
+                    style={{
+                      color: card.textColor,
+                      border:
+                        focusedField === `${card.id}-title`
+                          ? "2px solid rgb(255, 106, 0)"
+                          : hoveredField === `${card.id}-title`
+                            ? "2px dotted rgb(255, 106, 0)"
+                            : "2px solid transparent",
+                    }}
+                    onClick={() => setFocusedField(`${card.id}-title`)}
+                    onDoubleClick={() =>
+                      handleStartEditingField(card.id, "title")
+                    }
+                    title="Double-click to edit"
+                  >
+                    {card.title}
+                  </h3>
+                  {focusedField === `${card.id}-title` && (
+                    <FieldToolbar
+                      cardId={card.id}
+                      fieldName="title"
+                      fieldValue={card.title}
+                      onDuplicate={handleDuplicateText}
+                      onDelete={handleDeleteField}
+                    />
+                  )}
+                </div>
               )}
               {editingField === `${card.id}-description` ? (
                 <textarea
