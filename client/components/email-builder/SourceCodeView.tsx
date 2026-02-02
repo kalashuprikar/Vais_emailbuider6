@@ -15,7 +15,6 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Copy, Download } from "lucide-react";
-import { toast } from "sonner";
 
 interface SourceCodeViewProps {
   template: EmailTemplate;
