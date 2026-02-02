@@ -475,7 +475,7 @@ export const TwoColumnCardBlockComponent: React.FC<
                           ? "2px solid rgb(255, 106, 0)"
                           : hoveredField === `${card.id}-title`
                             ? "2px dotted rgb(255, 106, 0)"
-                            : "2px solid transparent",
+                            : "none",
                     }}
                     onClick={() => setFocusedField(`${card.id}-title`)}
                     onDoubleClick={() =>
