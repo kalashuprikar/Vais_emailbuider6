@@ -442,47 +442,67 @@ export const TwoColumnCardBlockComponent: React.FC<
                 </div>
               )}
               {editingField === `${card.id}-description` ? (
-                <textarea
-                  autoFocus
-                  value={editingValue}
-                  onChange={(e) => setEditingValue(e.target.value)}
-                  onBlur={() => handleSaveEdit(card.id, "description")}
-                  onKeyPress={(e) => {
-                    if (e.key === "Escape") {
-                      setEditingField(null);
-                      setEditingValue("");
-                    }
-                  }}
-                  className="w-full text-xs leading-snug m-0 p-1 border-2 border-valasys-orange rounded"
-                  style={{
-                    color: card.textColor,
-                    backgroundColor: "transparent",
-                  }}
-                  rows={3}
-                />
+                <>
+                  <textarea
+                    autoFocus
+                    value={editingValue}
+                    onChange={(e) => setEditingValue(e.target.value)}
+                    onBlur={() => handleSaveEdit(card.id, "description")}
+                    onKeyPress={(e) => {
+                      if (e.key === "Escape") {
+                        setEditingField(null);
+                        setEditingValue("");
+                      }
+                    }}
+                    className="w-full text-xs leading-snug m-0 p-1 border-2 border-valasys-orange rounded"
+                    style={{
+                      color: card.textColor,
+                      backgroundColor: "transparent",
+                    }}
+                    rows={3}
+                  />
+                  <FieldToolbar
+                    cardId={card.id}
+                    fieldName="description"
+                    fieldValue={editingValue}
+                    onDuplicate={handleDuplicateText}
+                    onDelete={handleDeleteField}
+                  />
+                </>
               ) : (
-                <p
-                  className="text-xs leading-snug m-0 cursor-pointer px-2 py-1 rounded transition-all"
-                  style={{
-                    color: card.textColor,
-                    border:
-                      focusedField === `${card.id}-description`
-                        ? "2px solid rgb(255, 106, 0)"
-                        : hoveredField === `${card.id}-description`
-                          ? "2px dotted rgb(255, 106, 0)"
-                          : "2px solid transparent",
-                  }}
-                  onClick={() => setFocusedField(`${card.id}-description`)}
-                  onDoubleClick={() =>
-                    handleStartEditingField(card.id, "description")
-                  }
+                <div
                   onMouseEnter={() => setHoveredField(`${card.id}-description`)}
                   onMouseLeave={() => setHoveredField(null)}
-                  onBlur={() => setFocusedField(null)}
-                  title="Double-click to edit"
                 >
-                  {card.description}
-                </p>
+                  <p
+                    className="text-xs leading-snug m-0 cursor-pointer px-2 py-1 rounded transition-all"
+                    style={{
+                      color: card.textColor,
+                      border:
+                        focusedField === `${card.id}-description`
+                          ? "2px solid rgb(255, 106, 0)"
+                          : hoveredField === `${card.id}-description`
+                            ? "2px dotted rgb(255, 106, 0)"
+                            : "2px solid transparent",
+                    }}
+                    onClick={() => setFocusedField(`${card.id}-description`)}
+                    onDoubleClick={() =>
+                      handleStartEditingField(card.id, "description")
+                    }
+                    title="Double-click to edit"
+                  >
+                    {card.description}
+                  </p>
+                  {focusedField === `${card.id}-description` && (
+                    <FieldToolbar
+                      cardId={card.id}
+                      fieldName="description"
+                      fieldValue={card.description}
+                      onDuplicate={handleDuplicateText}
+                      onDelete={handleDeleteField}
+                    />
+                  )}
+                </div>
               )}
             </div>
           </div>
