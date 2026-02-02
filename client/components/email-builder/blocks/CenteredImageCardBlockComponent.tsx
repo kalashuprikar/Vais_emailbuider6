@@ -207,8 +207,8 @@ export const CenteredImageCardBlockComponent: React.FC<
       });
       onBlockUpdate({ ...block, titles: newTitles });
 
-      // Copy to clipboard with styling
-      const styledContent = `<h2 style="font-weight: bold; font-size: 20px; color: rgb(17, 24, 39); text-align: center;">${titleToDuplicate.content}</h2>`;
+      // Copy to clipboard with complete styling
+      const styledContent = `<h2 style="font-weight: 700; font-size: 20px; color: rgb(17, 24, 39); text-align: center; margin: 0; padding: 12px; border-radius: 8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.5;">${titleToDuplicate.content}</h2>`;
       navigator.clipboard
         .write([
           new ClipboardItem({
