@@ -5878,6 +5878,104 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
               </div>
             </div>
 
+            <div>
+              <h4 className="text-xs font-bold text-gray-900 mb-3">Layout</h4>
+              <div className="space-y-3">
+                <div>
+                  <Label className="text-xs text-gray-700 mb-1 block">
+                    Card Width
+                  </Label>
+                  <div className="flex gap-2">
+                    <Input
+                      type="text"
+                      inputMode="numeric"
+                      value={twoCardWidthInput}
+                      onChange={(e) => {
+                        const inputValue = e.target.value;
+                        const numericValue = inputValue.replace(/[^\d]/g, "");
+
+                        setTwoCardWidthInput(inputValue);
+
+                        if (numericValue !== "") {
+                          const num = parseInt(numericValue);
+                          const maxValue = twoColBlock.widthUnit === "%" ? 100 : 1000;
+                          if (num >= 1 && num <= maxValue) {
+                            onBlockUpdate({
+                              ...twoColBlock,
+                              width: num,
+                            });
+                          }
+                        }
+                      }}
+                      onBlur={(e) => {
+                        const inputValue = e.target.value;
+                        const numericValue = inputValue.replace(/[^\d]/g, "");
+                        if (numericValue === "") {
+                          onBlockUpdate({
+                            ...twoColBlock,
+                            width: 100,
+                          });
+                          setTwoCardWidthInput("100");
+                        } else {
+                          const num = parseInt(numericValue);
+                          const maxValue = twoColBlock.widthUnit === "%" ? 100 : 1000;
+                          if (num > maxValue) {
+                            onBlockUpdate({
+                              ...twoColBlock,
+                              width: maxValue,
+                            });
+                            setTwoCardWidthInput(String(maxValue));
+                          } else if (num < 1) {
+                            onBlockUpdate({
+                              ...twoColBlock,
+                              width: 1,
+                            });
+                            setTwoCardWidthInput("1");
+                          }
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "ArrowUp") {
+                          e.preventDefault();
+                          const currentWidth = parseInt(twoCardWidthInput) || 100;
+                          const maxValue = twoColBlock.widthUnit === "%" ? 100 : 1000;
+                          const newWidth = Math.min(currentWidth + 1, maxValue);
+                          onBlockUpdate({
+                            ...twoColBlock,
+                            width: newWidth,
+                          });
+                          setTwoCardWidthInput(String(newWidth));
+                        } else if (e.key === "ArrowDown") {
+                          e.preventDefault();
+                          const currentWidth = parseInt(twoCardWidthInput) || 100;
+                          const newWidth = Math.max(1, currentWidth - 1);
+                          onBlockUpdate({
+                            ...twoColBlock,
+                            width: newWidth,
+                          });
+                          setTwoCardWidthInput(String(newWidth));
+                        }
+                      }}
+                      className="flex-1 focus:ring-valasys-orange focus:ring-2"
+                    />
+                    <select
+                      value={twoColBlock.widthUnit}
+                      onChange={(e) =>
+                        onBlockUpdate({
+                          ...twoColBlock,
+                          widthUnit: e.target.value as "px" | "%",
+                        })
+                      }
+                      className="px-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-valasys-orange"
+                    >
+                      <option value="%">%</option>
+                      <option value="px">px</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {selectedCard && (
               <>
                 <div>
