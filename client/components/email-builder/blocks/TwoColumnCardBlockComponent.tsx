@@ -55,14 +55,11 @@ interface TwoColumnCardBlockComponentProps {
   block: TwoColumnCardBlock;
   isSelected: boolean;
   onUpdate: (block: TwoColumnCardBlock) => void;
-  onDuplicate?: (block: TwoColumnCardBlock, position: number) => void;
-  onDelete?: (blockId: string) => void;
-  blockIndex?: number;
 }
 
 export const TwoColumnCardBlockComponent: React.FC<
   TwoColumnCardBlockComponentProps
-> = ({ block, isSelected, onUpdate, onDuplicate, onDelete, blockIndex }) => {
+> = ({ block, isSelected, onUpdate }) => {
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
   const [resizingCardId, setResizingCardId] = useState<string | null>(null);
   const [isResizing, setIsResizing] = useState(false);
